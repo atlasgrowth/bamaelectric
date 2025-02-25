@@ -44,6 +44,7 @@ export function Hero() {
 
   return (
     <section className="relative h-screen overflow-hidden">
+      {/* Background slides with overlay */}
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -60,6 +61,7 @@ export function Hero() {
         </div>
       ))}
 
+      {/* Content */}
       <div className="absolute inset-0 flex items-center">
         <div className="container relative z-10 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
@@ -71,9 +73,13 @@ export function Hero() {
               {business?.basic_info.city && ` in ${business.basic_info.city}`}
             </p>
 
+            {/* Improved buttons for mobile consistency */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href={slides[currentSlide].link}>
-                <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-black">
+              <Link href={slides[currentSlide].link} className="w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto"
+                >
                   Learn More
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -82,7 +88,7 @@ export function Hero() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-black transition-colors"
+                className="border-white text-white hover:bg-white hover:text-black transition-colors w-full sm:w-auto"
                 onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
                 <Phone className="mr-2 h-5 w-5" />
@@ -93,7 +99,8 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* Slide indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -101,6 +108,7 @@ export function Hero() {
               currentSlide === index ? "bg-amber-500" : "bg-white/50"
             }`}
             onClick={() => setCurrentSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
