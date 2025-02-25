@@ -12,25 +12,10 @@ export function Hero() {
     retry: false
   });
 
-  // Advanced navigation function that prevents double parameters
+  // Simple navigation function that matches how your navbar works
   const handleNavigation = (path) => {
-    // Extract business ID from current URL
-    const businessId = new URLSearchParams(window.location.search).get('s');
-    const newPath = businessId ? `${path}?s=${businessId}` : path;
-
-    // If we have a query parameter in the main URL, we need to remove it
-    if (window.location.search && window.location.search.includes('s=')) {
-      // Set hash first
-      window.location.hash = newPath;
-
-      // Then remove the query parameter by using history API
-      const cleanURL = window.location.origin + window.location.pathname + window.location.hash;
-      window.history.replaceState({}, document.title, cleanURL);
-      return;
-    }
-
-    // Otherwise just set the hash
-    window.location.hash = newPath;
+    // Just set the hash directly, keeping the existing URL structure
+    window.location.hash = path;
   };
 
   const slides = [
