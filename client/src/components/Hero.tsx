@@ -13,6 +13,16 @@ export function Hero() {
     retry: false
   });
 
+  // Add this function to properly handle URL parameters
+  const getUrlWithParams = (path) => {
+    // Get the current search params
+    const currentParams = new URLSearchParams(window.location.search);
+    const businessId = currentParams.get('s');
+
+    // Only add the parameter if it exists
+    return businessId ? `${path}?s=${businessId}` : path;
+  };
+
   const slides = [
     {
       image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000",
@@ -73,7 +83,7 @@ export function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black">
-                <Link href={`${slides[currentSlide].link}${window.location.search}`}>
+                <Link href={getUrlWithParams(slides[currentSlide].link)}>
                   Learn More
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
