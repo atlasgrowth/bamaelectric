@@ -187,31 +187,28 @@ export default function Residential() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 transition-colors duration-200">
       {/* Hero Section */}
-      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-          <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
-        </div>
-        <div className="absolute inset-0 flex items-center">
-          <div className="container relative z-10 px-4 sm:px-6">
-            <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
-              <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
-                RESIDENTIAL ELECTRICAL SERVICES
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
-                Expert Electrical Solutions for Your Home
-              </h1>
-              <p className="text-zinc-200 mb-6 sm:mb-8 text-sm sm:text-base">
-                Complete electrical solutions for your home by {business?.basic_info.name || 'our professional team'}
-                {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <section 
+        className="relative h-[85vh] sm:h-[90vh] md:h-screen bg-cover bg-center flex items-center overflow-hidden" 
+        style={{
+          backgroundImage: 'url(https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
+        <div className="container relative z-10">
+          <div className="max-w-2xl">
+            <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
+              RESIDENTIAL ELECTRICAL SERVICES
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Expert Electrical Solutions for Your Home
+            </h1>
+            <p className="text-zinc-200 mb-8">
+              Complete electrical solutions for your home by {business?.basic_info.name || 'our professional team'}
+              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
                 className="bg-amber-500 hover:bg-amber-600 text-black"
