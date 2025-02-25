@@ -1,0 +1,133 @@
+#!/bin/bash
+set -e
+
+echo "🚀 Starting comprehensive GitHub deployment process..."
+
+# Get current date for commit messages
+DEPLOY_DATE=$(date "+%Y-%m-%d %H:%M:%S")
+
+# Step 1: Initialize git if not already initialized
+if [ ! -d .git ]; then
+  echo "Initializing git repository..."
+  git init
+  git branch -M main
+fi
+
+# Step 2: Get GitHub username and repo name from git remote, or set it if not available
+if git remote -v | grep -q origin; then
+  GITHUB_REMOTE=$(git remote get-url origin)
+  GITHUB_REPO=$(echo $GITHUB_REMOTE | sed -e 's/.*github.com[\/:]\(.*\)\.git/\1/')
+  echo "Detected GitHub repository: $GITHUB_REPO"
+else
+  echo "No git remote found. Please enter your GitHub username:"
+  read GITHUB_USERNAME
+  echo "Please enter your repository name:"
+  read REPO_NAME
+  GITHUB_REPO="$GITHUB_USERNAME/$REPO_NAME"
+  git remote add origin "https://github.com/$GITHUB_REPO.git"
+  echo "Set up remote for: $GITHUB_REPO"
+fi
+
+# Step 3: Save all current changes to main branch
+echo "Saving all changes to main branch..."
+git add .
+git commit -m "Update project code - $DEPLOY_DATE" || echo "No changes to commit"
+
+# Step 4: Push the main branch to GitHub (this stores all your source code)
+echo "Pushing source code to main branch..."
+git push -u origin main || (echo "Error pushing to main branch. You might need to pull first." && exit 1)
+
+# Step 5: Build the client-side application
+echo "Building the client application for GitHub Pages..."
+npm run build:client
+
+# Step 6: Prepare and deploy to gh-pages branch
+echo "Setting up deployment to gh-pages branch..."
+
+# Create a temporary directory for the deployment
+rm -rf .deploy
+mkdir -p .deploy
+cp -r dist/* .deploy/
+
+# Add special 404.html file for SPA routing
+cat > .deploy/404.html << EOF
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Redirect to the home page with the current path as a hash
+    var path = window.location.pathname;
+    window.location.href = '/#' + path;
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
+EOF
+
+# Add a CNAME file if you have a custom domain
+# echo "yourdomain.com" > .deploy/CNAME
+
+# Create a notice file to help future you understand the deployment
+cat > .deploy/deployment-info.html << EOF
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Deployment Information</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    .note { background: #ffffcc; padding: 15px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>GitHub Pages Deployment Information</h1>
+  
+  <div class="note">
+    <h2>Important Note</h2>
+    <p>This site was deployed from the Replit project to GitHub Pages on $DEPLOY_DATE.</p>
+    <p>The source code is stored in the <strong>main</strong> branch, while the built files for GitHub Pages are in the <strong>gh-pages</strong> branch.</p>
+  </div>
+  
+  <h2>How to Update This Site</h2>
+  <ol>
+    <li>Make changes in the Replit project</li>
+    <li>Run the deployment script with <code>npm run deploy:github</code></li>
+    <li>Changes will be pushed to both main (source) and gh-pages (built site)</li>
+  </ol>
+  
+  <p>Return to <a href="index.html">main application</a></p>
+</body>
+</html>
+EOF
+
+# Navigate to the deploy directory
+cd .deploy
+
+# Initialize a new git repository for gh-pages branch
+echo "Initializing git repository for gh-pages deployment..."
+git init
+git checkout -b gh-pages
+
+# Configure git for the deployment
+git config user.name "Replit Deployment"
+git config user.email "deployment@example.com"
+
+# Add all files
+git add .
+
+# Commit
+git commit -m "Deploy to GitHub Pages - $DEPLOY_DATE"
+
+# Force push to the gh-pages branch
+echo "Pushing to gh-pages branch..."
+git push -f "https://github.com/$GITHUB_REPO.git" gh-pages
+
+echo "🎉 Deployment complete!"
+echo "✅ Source code pushed to: https://github.com/$GITHUB_REPO"
+echo "✅ Website deployed to: https://$(echo $GITHUB_REPO | cut -d'/' -f1).github.io/$(echo $GITHUB_REPO | cut -d'/' -f2)/"
+echo "📝 Remember to enable GitHub Pages in your repository settings if you haven't already!"
+echo "   Go to Settings > Pages and select the gh-pages branch as the source."
