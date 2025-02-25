@@ -7,19 +7,13 @@ import { Reviews } from "@/components/Reviews";
 import { useQuery } from "@tanstack/react-query";
 import { getBusinessData } from "@/lib/utils";
 import { 
-  Zap, 
-  ShieldCheck, 
-  Clock, 
-  Award, 
-  Lightbulb, 
-  Home, 
-  WrenchIcon, 
-  Phone, 
+  Phone,
   Check, 
-  BatteryCharging, 
+  WrenchIcon,
   PanelLeft,
+  Lightbulb,
+  BatteryCharging,
   CheckCircle2,
-  CircleDot,
   ArrowRight
 } from "lucide-react";
 
@@ -195,7 +189,7 @@ export default function Residential() {
   ];
 
   return (
-    <div className="bg-zinc-50 text-zinc-900">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 transition-colors duration-200">
       {/* Hero Section */}
       <section 
         className="relative min-h-[90vh] bg-cover bg-center flex items-center overflow-hidden" 
@@ -203,42 +197,24 @@ export default function Residential() {
           backgroundImage: 'url(https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000)'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/90 to-amber-900/50" />
-
-        {/* Animated background particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <div 
-              key={i}
-              className="absolute rounded-full bg-amber-500/20 animate-float"
-              style={{
-                width: `${Math.random() * 100 + 50}px`,
-                height: `${Math.random() * 100 + 50}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDuration: `${Math.random() * 10 + 10}s`,
-                animationDelay: `${Math.random() * 5}s`
-              }}
-            />
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
 
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4 animate-pulse">
-              EXPERT RESIDENTIAL ELECTRICAL SERVICES
+            <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
+              RESIDENTIAL ELECTRICAL SERVICES
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight opacity-0 animate-fadeInUp" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Expert Electrical Solutions for Your Home
             </h1>
-            <p className="text-xl text-amber-100 mb-8 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            <p className="text-zinc-200 mb-8">
               Complete electrical solutions for your home by {business?.basic_info.name || 'our professional team'}
               {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}>
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
-                className="bg-amber-500 hover:bg-amber-600 text-black border-none"
+                className="bg-amber-500 hover:bg-amber-600 text-black"
                 onClick={() => {
                   const contactSection = document.getElementById('contact-section');
                   contactSection?.scrollIntoView({ behavior: 'smooth' });
@@ -250,7 +226,7 @@ export default function Residential() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-amber-900 transition-all"
+                className="border-white text-white hover:bg-white hover:text-black"
                 onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
                 <Phone className="mr-2 h-5 w-5" />
@@ -264,12 +240,12 @@ export default function Residential() {
       {/* Services Section */}
       <section 
         ref={servicesRef} 
-        className="py-20 bg-gradient-to-b from-amber-900 to-zinc-900"
+        className="py-20 bg-zinc-900 dark:bg-black"
       >
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white">Our Residential Services</h2>
-            <p className="text-amber-100">
+            <p className="text-zinc-300">
               Comprehensive electrical services for homeowners, focusing on safety, quality, and customer satisfaction.
             </p>
           </div>
@@ -285,14 +261,14 @@ export default function Residential() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className={`bg-gradient-to-r ${service.color} p-8 h-full`}>
+                <div className="bg-zinc-800 dark:bg-zinc-900 p-8 h-full border border-zinc-700">
                   <div className="flex items-start gap-4">
-                    <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg">
-                      {service.icon}
+                    <div className="bg-zinc-900/50 dark:bg-black/50 p-3 rounded-lg">
+                      <div className="text-amber-500">{service.icon}</div>
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
-                      <p className="text-amber-100 mb-6">{service.description}</p>
+                      <p className="text-zinc-300 mb-6">{service.description}</p>
                     </div>
                   </div>
 
@@ -300,8 +276,8 @@ export default function Residential() {
                     <ul className="grid grid-cols-2 gap-2">
                       {service.details.map((detail, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-amber-300 shrink-0 mt-0.5" />
-                          <span className="text-amber-100">{detail}</span>
+                          <Check className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+                          <span className="text-zinc-300">{detail}</span>
                         </li>
                       ))}
                     </ul>
@@ -314,33 +290,33 @@ export default function Residential() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact-section" className="py-20 bg-gradient-to-br from-amber-900 to-zinc-900 text-white">
+      <section id="contact-section" className="py-20 bg-zinc-900 dark:bg-black text-white">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-              <p className="text-amber-100 mb-8">
+              <p className="text-zinc-300 mb-8">
                 Contact us today to schedule a service, request a free estimate, or inquire about any of our residential electrical services.
               </p>
 
-              <div className="bg-zinc-800/50 backdrop-blur-sm rounded-lg p-6 mb-8">
+              <div className="bg-zinc-800 dark:bg-zinc-900/50 rounded-lg p-6 mb-8 border border-zinc-700">
                 <h3 className="text-xl font-bold mb-4">Why Choose Our Services?</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span>Expert electricians with years of experience</span>
+                    <span className="text-zinc-300">Expert electricians with years of experience</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span>100% satisfaction guarantee on all services</span>
+                    <span className="text-zinc-300">100% satisfaction guarantee on all services</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span>Transparent pricing with no hidden fees</span>
+                    <span className="text-zinc-300">Transparent pricing with no hidden fees</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span>Fast, reliable service when you need it most</span>
+                    <span className="text-zinc-300">Fast, reliable service when you need it most</span>
                   </li>
                 </ul>
               </div>
@@ -349,13 +325,13 @@ export default function Residential() {
                 <Phone className="h-8 w-8 text-amber-500" />
                 <div>
                   <h4 className="font-bold text-lg">Call Us Directly</h4>
-                  <p className="text-amber-100">{business?.basic_info.phone || 'Loading...'}</p>
+                  <p className="text-zinc-300">{business?.basic_info.phone || 'Loading...'}</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <Form onSubmit={handleSubmit} className="bg-zinc-800 rounded-lg p-8 shadow-xl border border-zinc-700">
+              <Form onSubmit={handleSubmit} className="bg-zinc-800 dark:bg-zinc-900 rounded-lg p-8 shadow-xl border border-zinc-700">
                 <h3 className="text-2xl font-bold mb-6 text-white">Request a Free Quote</h3>
                 <div className="space-y-4">
                   <div>
@@ -430,16 +406,16 @@ export default function Residential() {
       </div>
 
       {/* Call to Action */}
-      <section className="py-16 bg-amber-500">
+      <section className="py-16 bg-zinc-900 dark:bg-black">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">Ready to Get Started?</h2>
-          <p className="text-black/80 max-w-2xl mx-auto mb-8">
-            Contact us today to schedule your service or request a free estimate for any of our residential electrical services.
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Get Started?</h2>
+          <p className="text-zinc-300 max-w-2xl mx-auto mb-8">
+            Contact us today to schedule your service or request a free estimate.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-black hover:bg-zinc-800 text-white"
+              className="bg-amber-500 hover:bg-amber-600 text-black"
               onClick={() => {
                 const contactSection = document.getElementById('contact-section');
                 contactSection?.scrollIntoView({ behavior: 'smooth' });
@@ -450,7 +426,7 @@ export default function Residential() {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-black text-black hover:bg-black hover:text-amber-500"
+              className="border-white text-white hover:bg-white hover:text-black"
               onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
             >
               <Phone className="mr-2 h-5 w-5" />

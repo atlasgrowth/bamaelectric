@@ -38,9 +38,9 @@ export function Map() {
   }
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-zinc-900 dark:bg-black">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Location</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-white">Our Location</h2>
         <div id="map" className="h-[400px] rounded-lg shadow-lg" />
       </div>
     </section>

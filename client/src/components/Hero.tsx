@@ -56,7 +56,7 @@ export function Hero() {
             backgroundPosition: 'center'
           }}
         >
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
         </div>
       ))}
 
@@ -66,15 +66,14 @@ export function Hero() {
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               {slides[currentSlide].title}
             </h1>
-            <p className="text-xl text-white/90 mb-8">
+            <p className="text-zinc-200 mb-8">
               {slides[currentSlide].subtitle}
               {business?.basic_info.city && ` in ${business.basic_info.city}`}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* Use the exact same Link component your navbar uses */}
               <Link href={slides[currentSlide].link}>
-                <Button size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black">
+                <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-black">
                   Learn More
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -83,7 +82,7 @@ export function Hero() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="bg-black/30 backdrop-blur-sm text-white border-white hover:bg-white hover:text-black transition-colors"
+                className="border-white text-white hover:bg-white hover:text-black transition-colors"
                 onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
                 <Phone className="mr-2 h-5 w-5" />
@@ -99,7 +98,7 @@ export function Hero() {
           <button
             key={index}
             className={`w-3 h-3 rounded-full transition-colors ${
-              currentSlide === index ? "bg-white" : "bg-white/50"
+              currentSlide === index ? "bg-amber-500" : "bg-white/50"
             }`}
             onClick={() => setCurrentSlide(index)}
           />
