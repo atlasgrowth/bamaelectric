@@ -3,11 +3,49 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: white;
+    --foreground: theme('colors.zinc.900');
+  }
+
+  .dark {
+    --background: theme('colors.zinc.900');
+    --foreground: white;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground transition-colors duration-200;
   }
+
+  section {
+    @apply transition-colors duration-200;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply transition-colors duration-200;
+  }
+
+  p {
+    @apply transition-colors duration-200;
+  }
+}
+
+.bg-section-dark {
+  @apply bg-zinc-900 dark:bg-black;
+}
+
+.bg-section-light {
+  @apply bg-white dark:bg-zinc-900;
+}
+
+.text-section-dark {
+  @apply text-white dark:text-zinc-200;
+}
+
+.text-section-light {
+  @apply text-zinc-900 dark:text-white;
 }
