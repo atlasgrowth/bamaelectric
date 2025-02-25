@@ -5,24 +5,8 @@
   <title>Redirecting...</title>
   <script>
     // Redirect to the home page with the current path as a hash
-    (function() {
-      var path = window.location.pathname;
-      var repoName = 'bamaelectric';
-      var basePath = '/' + repoName + '/';
-
-      // Remove the base path (if present) to avoid duplication
-      if (path.indexOf(basePath) === 0) {
-        path = path.substring(basePath.length);
-      }
-
-      // Make sure path starts with /
-      if (!path.startsWith('/')) {
-        path = '/' + path;
-      }
-
-      // Redirect to the index with the path as hash
-      window.location.href = basePath + '#' + path;
-    })();
+    var path = window.location.pathname;
+    window.location.href = '/#' + path;
   </script>
 </head>
 <body>
