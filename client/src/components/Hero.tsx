@@ -21,13 +21,13 @@ export function Hero() {
       link: "/residential"
     },
     {
-      image: "https://images.unsplash.com/photo-1590959651373-a3db0f38c961?auto=format&fit=crop&q=80&w=2000",
+      image: "https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg",
       title: "Commercial Electrical Services",
       subtitle: `Powering businesses with ${business?.basic_info.name || 'expert'} commercial solutions`,
       link: "/commercial"
     },
     {
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=2000",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbM6AgTt8Za_p0YZAXT-_mFnmqCPuLc7HxwA&s",
       title: "Industrial Electrical Services",
       subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
       link: "/industrial"

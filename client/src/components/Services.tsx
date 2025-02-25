@@ -59,14 +59,14 @@ export default function Services() {
     {
       title: "Commercial",
       description: `${business?.basic_info.name || 'We offer'} comprehensive electrical solutions for businesses, from office buildings to retail spaces, ensuring reliable power for your operations${business?.basic_info.city ? ` throughout ${business.basic_info.city}` : ''}.`,
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1000",
+      image: "https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg",
       link: "/commercial",
       icon: <Building2 className="h-6 w-6 text-amber-500" />
     },
     {
       title: "Industrial",
       description: `${business?.basic_info.name || 'We deliver'} specialized electrical services for manufacturing and industrial facilities, including power distribution and control systems${business?.basic_info.city ? ` in and around ${business.basic_info.city}` : ''}.`,
-      image: "https://images.unsplash.com/photo-1581093458791-9d09daad908d?auto=format&fit=crop&q=80&w=1000",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbM6AgTt8Za_p0YZAXT-_mFnmqCPuLc7HxwA&s",
       link: "/industrial",
       icon: <Factory className="h-6 w-6 text-amber-500" />
     }
