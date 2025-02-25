@@ -317,7 +317,7 @@ export default function Industrial() {
             }`} style={{ transitionDelay: '200ms' }}>
               <div className="aspect-square bg-zinc-800 rounded-lg overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1581093458791-9f3c3fbe8c54?auto=format&fit=crop&q=80&w=600"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbM6AgTt8Za_p0YZAXT-_mFnmqCPuLc7HxwA&s"
                   alt="Industrial electrical panel"
                   className="w-full h-full object-cover"
                 />
