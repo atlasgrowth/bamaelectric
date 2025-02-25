@@ -1,4 +1,15 @@
-#!/bin/bash
+I see the issue now. The problem is with how the token is being passed to git in your Repl.it environment. Let's fix your deployment script with a more direct approach that should work in your new Repl.it account.
+Here's what to do:
+
+First, verify your GitHub token is correctly set as a secret:
+
+In Repl.it, go to "Secrets" in the Tools panel
+Make sure you have GITHUB_TOKEN (case sensitive) with your GitHub personal access token
+
+
+Now let's modify your deploy script to use the token more explicitly. Create a new file called fixed-deploy.sh with the following content:
+
+bashCopy#!/bin/bash
 set -e
 echo "🚀 Starting fixed GitHub deployment process..."
 
@@ -90,3 +101,43 @@ git push -f "${GITHUB_URL}" gh-pages
 echo "🎉 Deployment complete!"
 echo "✅ Source code pushed to: https://github.com/atlasgrowth/bamaelectric"
 echo "✅ Website deployed to: https://atlasgrowth.github.io/bamaelectric/"
+
+Make the new script executable:
+
+bashCopychmod +x fixed-deploy.sh
+
+Add a new script to your package.json:
+
+jsonCopy"scripts": {
+  "deploy:fixed": "bash fixed-deploy.sh"
+}
+
+Try running the new deployment script:
+
+bashCopynpm run deploy:fixed
+This modified script should work because:
+
+It uses the token directly in the Git URLs
+It sets up Git user credentials explicitly
+It doesn't rely on the askpass mechanism that's failing
+
+If you still encounter issues, try adding these commands in your Repl.it shell before running the deployment:
+bashCopygit config --global credential.helper store
+echo "https://oauth2:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
+chmod 600 ~/.git-credentials
+Let me know if this works or if you're still facing issues!RetryNdoes it send main code to main brnahc too i like when it does that so github is fully up to dteEditYes, the script I provided includes both functions:
+
+It pushes your main code to the main branch first. This happens in Step 5 of the script:
+
+bashCopy# Step 5: Push the main branch to GitHub (this stores all your source code)
+echo "Pushing source code to main branch..."
+git push -u origin main || (echo "Error pushing to main branch. You might need to pull first." && exit 1)
+
+Then it builds and deploys the built files to the gh-pages branch. This happens in Step 7 and onwards.
+
+This way, your entire GitHub repository stays up to date:
+
+The main branch will contain all your source code
+The gh-pages branch will contain the built/compiled files for the live website
+
+The script preserves this dual-branch deployment approach from your original script, just making it more robust for your new Repl.it environment. Your GitHub repository will be fully up to date with all your changes after running the deployment.
