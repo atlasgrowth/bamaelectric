@@ -29,14 +29,12 @@ const useHashLocation = () => {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  return [hash, navigate];
+  const navigate = React.useCallback((to: string) => {
+    // Always use relative paths for navigation
+    window.location.hash = to.replace(/^\//, '');
+  }, []);
 
-  function navigate(to: string) {
-    // Remove base URL if it's at the start of the path
-    const base = import.meta.env.BASE_URL;
-    const normalizedPath = to.startsWith(base) ? to.slice(base.length) : to;
-    window.location.hash = normalizedPath;
-  }
+  return [hash, navigate] as [string, (to: string) => void];
 };
 
 function AppRouter() {
@@ -60,7 +58,6 @@ function AppRouter() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Use the custom hash location hook with Router */}
       <Router hook={useHashLocation}>
         <AppRouter />
       </Router>
