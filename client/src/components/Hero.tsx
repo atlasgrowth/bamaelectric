@@ -1,32 +1,36 @@
-// Hero.jsx
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "wouter";
 import { getBusinessData } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [, navigate] = useLocation();
-
   const { data: business } = useQuery({
     queryKey: ['business'],
     queryFn: getBusinessData,
     retry: false
   });
 
-  // Specialized navigation function that preserves business ID
-  const navigateTo = (path) => {
+  // Advanced navigation function that prevents double parameters
+  const handleNavigation = (path) => {
     // Extract business ID from current URL
-    const searchParams = new URLSearchParams(window.location.search);
-    const businessId = searchParams.get('s');
+    const businessId = new URLSearchParams(window.location.search).get('s');
+    const newPath = businessId ? `${path}?s=${businessId}` : path;
 
-    // Add the business ID to the destination path if it exists
-    const destination = businessId ? `${path}?s=${businessId}` : path;
+    // If we have a query parameter in the main URL, we need to remove it
+    if (window.location.search && window.location.search.includes('s=')) {
+      // Set hash first
+      window.location.hash = newPath;
 
-    // Use the navigate function from wouter which will use our custom hook
-    navigate(destination);
+      // Then remove the query parameter by using history API
+      const cleanURL = window.location.origin + window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, cleanURL);
+      return;
+    }
+
+    // Otherwise just set the hash
+    window.location.hash = newPath;
   };
 
   const slides = [
@@ -91,7 +95,7 @@ export function Hero() {
               <Button 
                 size="lg" 
                 className="bg-yellow-400 hover:bg-yellow-500 text-black"
-                onClick={() => navigateTo(slides[currentSlide].link)}
+                onClick={() => handleNavigation(slides[currentSlide].link)}
               >
                 Learn More
                 <ArrowRight className="ml-2 h-5 w-5" />
