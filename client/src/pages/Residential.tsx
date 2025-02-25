@@ -190,7 +190,9 @@ export default function Residential() {
       <section 
         className="relative h-[85vh] sm:h-[90vh] md:h-screen bg-cover bg-center flex items-center overflow-hidden" 
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000)'
+          backgroundImage: 'url(https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
         }}
       >
         <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />

@@ -52,7 +52,7 @@ export default function Services() {
     {
       title: "Residential",
       description: `${business?.basic_info.name || 'We provide'} expert electrical services for homes, including installations, repairs, and upgrades to keep your home powered safely and efficiently${business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}.`,
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1000",
+      image: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
       link: "/residential",
       icon: <Home className="h-6 w-6 text-amber-500" />
     },
