@@ -135,25 +135,30 @@ export default function Industrial() {
   return (
     <div className="bg-zinc-900 text-zinc-100">
       {/* Hero Section */}
-      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen flex items-center bg-black">
+      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen overflow-hidden">
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0"
           style={{
             backgroundImage: "url('https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg')",
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.4
+            backgroundPosition: 'center'
           }}
-        />
-        <div className="container relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl font-bold text-white mb-6">
-              Industrial Electrical Solutions
-            </h1>
-            <p className="text-xl text-zinc-300 mb-8">
-              Powering industry with reliable, efficient, and innovative electrical solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+        >
+          <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
+        </div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="container relative z-10 px-4 sm:px-6">
+            <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
+              <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
+                INDUSTRIAL ELECTRICAL SERVICES
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
+                Industrial Electrical Solutions
+              </h1>
+              <p className="text-zinc-200 mb-6 sm:mb-8 text-sm sm:text-base">
+                Powering industry with reliable, efficient, and innovative electrical solutions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600">
                 <a href={`tel:${business?.basic_info.phone}`}>
                   <Phone className="mr-2 h-5 w-5" />

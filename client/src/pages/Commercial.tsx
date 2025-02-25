@@ -174,44 +174,51 @@ const Commercial = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200">
-      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
-        backgroundImage: 'url(https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg)',
-        backgroundPosition: 'center'
-      }}>
-        <div className="absolute inset-0 bg-black/80 dark:bg-black/90" />
-        <div className="container relative z-10">
-          <div className="max-w-2xl">
-            <div className="inline-block bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium mb-4">
-              COMMERCIAL SERVICES
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Commercial Electrical Solutions
-            </h1>
-            <p className="text-zinc-200 mb-8">
-              Powering businesses with professional electrical services by {business?.basic_info.name || 'our expert team'}
-              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-amber-500 hover:bg-amber-600 text-black"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact-section');
-                  contactSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Request Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black"
-                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                {business?.basic_info.phone || 'Call Now'}
-              </Button>
+      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
+        </div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="container relative z-10 px-4 sm:px-6">
+            <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
+              <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
+                COMMERCIAL ELECTRICAL SERVICES
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
+                Commercial Electrical Solutions
+              </h1>
+              <p className="text-zinc-200 mb-6 sm:mb-8 text-sm sm:text-base">
+                Powering businesses with reliable, efficient, and innovative electrical solutions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Button
+                  size="lg"
+                  className="bg-amber-500 hover:bg-amber-600 text-black"
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact-section');
+                    contactSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Request Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-black"
+                  onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  {business?.basic_info.phone || 'Call Now'}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
