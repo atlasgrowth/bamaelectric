@@ -41,7 +41,13 @@ const Commercial = () => {
 
   const [activeTab, setActiveTab] = useState(0);
   const [visibleFeatures, setVisibleFeatures] = useState([]);
+  const [visibleSections, setVisibleSections] = useState({
+    services: false,
+    process: false,
+    features: false
+  });
   const featuresRef = useRef(null);
+  const processRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,6 +89,9 @@ const Commercial = () => {
 
     if (featuresRef.current) {
       observer.observe(featuresRef.current);
+    }
+    if (processRef.current) {
+      observer.observe(processRef.current);
     }
 
     return () => {
