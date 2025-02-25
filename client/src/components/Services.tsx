@@ -107,11 +107,6 @@ export default function Services() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 </div>
-                <div className="absolute bottom-4 left-4">
-                  <span className="bg-amber-500 text-black px-3 py-1 rounded-full text-sm font-medium">
-                    {service.title}
-                  </span>
-                </div>
               </div>
               <div className="p-6">
                 <div className="flex items-start gap-3 mb-4">

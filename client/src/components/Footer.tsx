@@ -12,7 +12,7 @@ export function Footer() {
 
   return (
     <footer className="bg-zinc-900 dark:bg-black text-white py-20 transition-colors duration-200">
-      <div className="container">
+      <div className="container mx-auto text-center"> {/* Modification for centering */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">{business?.basic_info.name}</h3>

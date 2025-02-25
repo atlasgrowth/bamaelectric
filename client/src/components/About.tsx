@@ -83,7 +83,7 @@ export function About() {
           </div>
 
           {/* Text content with animations */}
-          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
+          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-4 py-1 rounded-md text-amber-700 dark:text-amber-300 text-sm font-medium mb-4">
               ABOUT US
             </div>
