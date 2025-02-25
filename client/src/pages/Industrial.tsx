@@ -162,16 +162,11 @@ export default function Industrial() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-zinc-900"
-                onClick={() => {
-                  const contactSection = document.getElementById('industrial-contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                className="bg-amber-500 hover:bg-amber-600 text-black"
+                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
-                Request Site Assessment
+                <Phone className="mr-2 h-5 w-5" />
+                Call for Site Assessment
               </Button>
             </div>
           </div>

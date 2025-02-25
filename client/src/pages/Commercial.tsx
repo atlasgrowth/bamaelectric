@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useQuery } from "@tanstack/react-query";
 import { getBusinessData } from "@/lib/utils";
 import {
@@ -30,15 +27,6 @@ const Commercial = () => {
     retry: false
   });
 
-  const [formData, setFormData] = useState({
-    companyName: "",
-    contactName: "",
-    email: "",
-    phone: "",
-    projectType: "",
-    message: ""
-  });
-
   const [activeTab, setActiveTab] = useState(0);
   const [visibleFeatures, setVisibleFeatures] = useState([]);
   const [visibleSections, setVisibleSections] = useState({
@@ -49,23 +37,6 @@ const Commercial = () => {
   const featuresRef = useRef(null);
   const processRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your inquiry. Our commercial team will contact you shortly!");
-    setFormData({
-      companyName: "",
-      contactName: "",
-      email: "",
-      phone: "",
-      projectType: "",
-      message: ""
-    });
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -401,140 +372,37 @@ const Commercial = () => {
 
       <section id="contact-section" className="py-20 bg-black dark:bg-zinc-950 text-white">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-4xl font-bold mb-6 text-white dark:text-black">Get in Touch</h2>
-              <p className="text-zinc-300 dark:text-zinc-400 mb-8">
-                Contact our commercial team to discuss your project needs.
-              </p>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-6 text-white">Get in Touch</h2>
+            <p className="text-zinc-300 mb-8">
+              Contact our commercial team to discuss your project needs.
+            </p>
 
-              <div className="bg-zinc-900 dark:bg-black border border-zinc-800 rounded-lg p-6 mb-8">
-                <h3 className="text-xl font-bold mb-4 text-white dark:text-black">Why Businesses Choose Us</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Dedicated commercial project managers",
-                    "Transparent pricing and detailed proposals",
-                    "Fully licensed, bonded, and insured",
-                    "Energy-efficient solutions that reduce costs"
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                      <span className="text-zinc-300 dark:text-zinc-400">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <Button 
+              size="lg"
+              className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto text-lg py-6 px-8"
+              onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
+            >
+              <Phone className="mr-2 h-6 w-6" />
+              {business?.basic_info.phone || 'Call Now for a Quote'}
+            </Button>
 
-              <div className="space-y-4">
+            <div className="mt-12 bg-zinc-900 dark:bg-black border border-zinc-800 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-4 text-white">Why Businesses Choose Us</h3>
+              <ul className="space-y-3">
                 {[
-                  { icon: <Phone className="h-6 w-6 text-amber-500" />, title: "Call Our Commercial Division", content: business?.basic_info.phone || 'Loading...' },
-                  { icon: <Mail className="h-6 w-6 text-amber-500" />, title: "Email Us", content: `commercial@${business?.basic_info.name?.toLowerCase().replace(/\s+/g, '') || 'company'}.com` },
-                  { icon: <Calendar className="h-6 w-6 text-amber-500" />, title: "Schedule a Consultation", content: "Available Monday-Friday, 8am-5pm" }
+                  "Dedicated commercial project managers",
+                  "Transparent pricing and detailed proposals",
+                  "Fully licensed, bonded, and insured",
+                  "Energy-efficient solutions that reduce costs"
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    {item.icon}
-                    <div>
-                      <h4 className="font-bold text-white dark:text-black">{item.title}</h4>
-                      <p className="text-zinc-300 dark:text-zinc-400">{item.content}</p>
-                    </div>
-                  </div>
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
+                    <span className="text-zinc-300">{item}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-
-            <Form onSubmit={handleSubmit} className="bg-zinc-900 dark:bg-black rounded-lg p-8 shadow-xl border border-zinc-800">
-              <h3 className="text-2xl font-bold mb-6 text-white dark:text-black">Commercial Service Inquiry</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Company Name</label>
-                  <Input
-                    name="companyName"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    placeholder="Your Company"
-                    required
-                    className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Contact Name</label>
-                  <Input
-                    name="contactName"
-                    value={formData.contactName}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    required
-                    className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-white dark:text-black">Email</label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Email"
-                      required
-                      className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-white dark:text-black">Phone</label>
-                    <Input
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Phone"
-                      required
-                      className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Project Type</label>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full rounded-md border border-zinc-600 py-2 px-3 bg-zinc-700 text-white"
-                    required
-                  >
-                    <option value="">Select Project Type</option>
-                    <option value="new-construction">New Construction</option>
-                    <option value="renovation">Renovation/Remodel</option>
-                    <option value="maintenance">Maintenance Contract</option>
-                    <option value="troubleshooting">Troubleshooting/Repair</option>
-                    <option value="energy-audit">Energy Efficiency Audit</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Project Details</label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Describe your project needs"
-                    rows={4}
-                    required
-                    className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-amber-500 hover:bg-amber-600 text-black"
-                >
-                  Submit Inquiry
-                </Button>
-                <p className="text-xs text-zinc-300 text-center mt-4">
-                  We typically respond to commercial inquiries within 1 business day.
-                </p>
-              </div>
-            </Form>
           </div>
         </div>
       </section>
