@@ -190,10 +190,10 @@ const Commercial = () => {
               COMMERCIAL SERVICES
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Commercial Electrical Solutions
+              {business?.basic_info.name || 'Professional'} Commercial Services
             </h1>
             <p className="text-zinc-200 mb-8">
-              Powering businesses with professional electrical services by {business?.basic_info.name || 'our expert team'}
+              Powering businesses with professional electrical solutions by {business?.basic_info.name || 'our expert team'}
               {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

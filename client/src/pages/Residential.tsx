@@ -203,7 +203,7 @@ export default function Residential() {
               RESIDENTIAL ELECTRICAL SERVICES
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Expert Electrical Solutions for Your Home
+              {business?.basic_info.name || 'Expert'} Residential Services
             </h1>
             <p className="text-zinc-200 mb-8">
               Complete electrical solutions for your home by {business?.basic_info.name || 'our professional team'}
