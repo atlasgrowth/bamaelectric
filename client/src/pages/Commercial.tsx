@@ -1,10 +1,27 @@
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Reviews } from "@/components/Reviews";
 import { useQuery } from "@tanstack/react-query";
 import { getBusinessData } from "@/lib/utils";
+import { 
+  Building2, 
+  FileText, 
+  Users, 
+  Clock, 
+  ShieldCheck, 
+  Wrench, 
+  Zap, 
+  Lightbulb, 
+  BarChart4, 
+  Factory, 
+  Phone, 
+  CheckCircle,
+  ArrowRight,
+  Mail,
+  Calendar
+} from "lucide-react";
 
 export default function Commercial() {
   const { data: business } = useQuery({
@@ -13,62 +30,586 @@ export default function Commercial() {
     retry: false
   });
 
+  const [formData, setFormData] = useState({
+    companyName: "",
+    contactName: "",
+    email: "",
+    phone: "",
+    projectType: "",
+    message: ""
+  });
+
+  const [activeTab, setActiveTab] = useState(0);
+  const [visibleFeatures, setVisibleFeatures] = useState([]);
+  const featuresRef = useRef(null);
+
+  // Handle form changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you for your inquiry. Our commercial team will contact you shortly!");
+    setFormData({
+      companyName: "",
+      contactName: "",
+      email: "",
+      phone: "",
+      projectType: "",
+      message: ""
+    });
+  };
+
+  // Intersection observer for features animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          const timer = setInterval(() => {
+            setVisibleFeatures(prev => {
+              if (prev.length < commercialFeatures.length) {
+                return [...prev, prev.length];
+              } else {
+                clearInterval(timer);
+                return prev;
+              }
+            });
+          }, 200);
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (featuresRef.current) {
+      observer.observe(featuresRef.current);
+    }
+
+    return () => {
+      if (featuresRef.current) {
+        observer.unobserve(featuresRef.current);
+      }
+    };
+  }, []);
+
+  // Setup automatic tab cycling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTab(prev => (prev + 1) % serviceCategories.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Commercial service categories
+  const serviceCategories = [
+    {
+      id: "design",
+      title: "Design & Planning",
+      icon: <FileText className="h-6 w-6" />,
+      description: "Professional electrical system design and planning for new construction or renovation projects.",
+      features: [
+        "Comprehensive electrical system blueprints",
+        "Energy efficiency planning",
+        "Code compliance review",
+        "Budget estimation and planning"
+      ]
+    },
+    {
+      id: "installation",
+      title: "Installation",
+      icon: <Zap className="h-6 w-6" />,
+      description: "Expert installation of complete electrical systems for commercial properties of all sizes.",
+      features: [
+        "Complete wiring and electrical system installation",
+        "Lighting systems and controls",
+        "Backup power and emergency systems",
+        "Fire alarm and security installations"
+      ]
+    },
+    {
+      id: "maintenance",
+      title: "Maintenance & Repair",
+      icon: <Wrench className="h-6 w-6" />,
+      description: "Regular maintenance and emergency repair services to keep your business running smoothly.",
+      features: [
+        "Preventative maintenance programs",
+        "24/7 emergency repair services",
+        "Electrical system inspections",
+        "Troubleshooting and diagnostics"
+      ]
+    },
+    {
+      id: "upgrades",
+      title: "Upgrades & Retrofits",
+      icon: <BarChart4 className="h-6 w-6" />,
+      description: "Modernize your commercial electrical systems for better efficiency and performance.",
+      features: [
+        "Energy-efficient lighting upgrades",
+        "Panel and system capacity upgrades",
+        "Smart building technology integration",
+        "Code compliance updates"
+      ]
+    },
+  ];
+
+  // Commercial features
+  const commercialFeatures = [
+    {
+      icon: <Building2 className="h-12 w-12 text-blue-600" />,
+      title: "Commercial Buildings",
+      description: "Comprehensive electrical services for office buildings, retail spaces, and mixed-use developments."
+    },
+    {
+      icon: <Factory className="h-12 w-12 text-blue-600" />,
+      title: "Industrial Facilities",
+      description: "Specialized electrical solutions for manufacturing plants, warehouses, and industrial complexes."
+    },
+    {
+      icon: <Users className="h-12 w-12 text-blue-600" />,
+      title: "Experienced Team",
+      description: "Our licensed commercial electricians have extensive experience with projects of all sizes."
+    },
+    {
+      icon: <Clock className="h-12 w-12 text-blue-600" />,
+      title: "Minimum Downtime",
+      description: "We work efficiently to minimize disruption to your business operations."
+    },
+    {
+      icon: <ShieldCheck className="h-12 w-12 text-blue-600" />,
+      title: "Code Compliant",
+      description: "All work meets or exceeds local and national electrical codes and regulations."
+    },
+    {
+      icon: <Lightbulb className="h-12 w-12 text-blue-600" />,
+      title: "Energy Efficiency",
+      description: "Solutions designed to reduce energy consumption and lower utility costs."
+    }
+  ];
+
+  // Client logos (placeholder for your actual clients)
+  const clients = [
+    { name: "ABC Corporation", logo: "https://via.placeholder.com/150" },
+    { name: "XYZ Industries", logo: "https://via.placeholder.com/150" },
+    { name: "Metro Development", logo: "https://via.placeholder.com/150" },
+    { name: "City Hospital", logo: "https://via.placeholder.com/150" },
+    { name: "Tech Solutions", logo: "https://via.placeholder.com/150" }
+  ];
+
   return (
-    <div>
-      <section className="relative h-[60vh] bg-cover bg-center" style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1590959651373-a3db0f38c961?auto=format&fit=crop&q=80&w=2000)'
+    <div className="bg-slate-50">
+      {/* Hero Section with Parallax Effect */}
+      <section className="relative h-[70vh] bg-cover bg-fixed flex items-center" style={{
+        backgroundImage: 'url(https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=2000)',
+        backgroundPosition: 'center'
       }}>
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="container relative z-10 h-full flex items-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-900/70" />
+        <div className="container relative z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Commercial Electrical Services
+            <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium mb-4">
+              COMMERCIAL SERVICES
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Commercial Electrical Solutions
             </h1>
-            <p className="text-xl text-white/90">
-              Powering businesses with {business?.basic_info.name}
+            <p className="text-xl text-white/90 mb-8">
+              Powering businesses with professional electrical services by {business?.basic_info.name || 'our expert team'} 
+              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}
             </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-white text-blue-900 border-white hover:bg-blue-900 hover:text-white hover:border-white transition-all"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact-section');
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Request Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                size="lg" 
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                {business?.basic_info.phone || 'Call Now'}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20">
+      {/* Services Tabs Section */}
+      <section className="py-20 bg-white">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-slate-800">Our Commercial Services</h2>
+            <p className="text-slate-600">
+              We provide a comprehensive range of electrical services designed specifically for commercial and industrial properties.
+            </p>
+          </div>
+
+          {/* Service Category Tabs */}
+          <div className="mb-12">
+            <div className="flex flex-wrap justify-center border-b">
+              {serviceCategories.map((category, index) => (
+                <button
+                  key={category.id}
+                  className={`px-6 py-4 text-lg font-medium transition-colors relative ${
+                    activeTab === index 
+                      ? 'text-blue-600' 
+                      : 'text-slate-600 hover:text-blue-500'
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                >
+                  <div className="flex items-center gap-2">
+                    {category.icon}
+                    {category.title}
+                  </div>
+                  {activeTab === index && (
+                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-all"></div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Service Content */}
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h3 className="text-2xl font-bold mb-4 text-slate-800">{serviceCategories[activeTab].title}</h3>
+              <p className="text-slate-600 mb-6">{serviceCategories[activeTab].description}</p>
+              <ul className="space-y-3">
+                {serviceCategories[activeTab].features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-blue-600 shrink-0 mt-0.5" />
+                    <span className="text-slate-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button className="mt-8 bg-blue-600 hover:bg-blue-700 text-white">
+                Learn More About {serviceCategories[activeTab].title}
+              </Button>
+            </div>
+            <div className="order-1 md:order-2 bg-slate-100 rounded-xl p-8 h-80 flex items-center justify-center">
+              <div className="transform transition-all duration-500 scale-90 hover:scale-100">
+                {activeTab === 0 && (
+                  <div className="flex flex-col items-center text-center">
+                    <FileText className="h-24 w-24 text-blue-600 mb-4" />
+                    <h4 className="text-xl font-bold text-slate-800">Professional Design</h4>
+                    <p className="text-slate-600 mt-2">Tailored electrical system planning for optimal performance</p>
+                  </div>
+                )}
+                {activeTab === 1 && (
+                  <div className="flex flex-col items-center text-center">
+                    <Zap className="h-24 w-24 text-blue-600 mb-4" />
+                    <h4 className="text-xl font-bold text-slate-800">Expert Installation</h4>
+                    <p className="text-slate-600 mt-2">Commercial-grade electrical installations done right</p>
+                  </div>
+                )}
+                {activeTab === 2 && (
+                  <div className="flex flex-col items-center text-center">
+                    <Wrench className="h-24 w-24 text-blue-600 mb-4" />
+                    <h4 className="text-xl font-bold text-slate-800">Reliable Maintenance</h4>
+                    <p className="text-slate-600 mt-2">Preventative care to avoid costly downtime</p>
+                  </div>
+                )}
+                {activeTab === 3 && (
+                  <div className="flex flex-col items-center text-center">
+                    <BarChart4 className="h-24 w-24 text-blue-600 mb-4" />
+                    <h4 className="text-xl font-bold text-slate-800">System Upgrades</h4>
+                    <p className="text-slate-600 mt-2">Modernizing systems for better efficiency and performance</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Commercial Features Grid */}
+      <section className="py-20 bg-slate-100" ref={featuresRef}>
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-slate-800">Why Choose Our Commercial Services</h2>
+            <p className="text-slate-600">
+              Our commercial electrical team delivers exceptional service, quality workmanship, and innovative solutions for businesses of all sizes.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {commercialFeatures.map((feature, index) => (
+              <div 
+                key={index} 
+                className={`bg-white rounded-lg p-8 shadow-md transform transition-all duration-700 hover:shadow-xl ${
+                  visibleFeatures.includes(index) 
+                    ? 'translate-y-0 opacity-100' 
+                    : 'translate-y-16 opacity-0'
+                }`}
+              >
+                <div className="mb-6">{feature.icon}</div>
+                <h3 className="text-xl font-bold mb-3 text-slate-800">{feature.title}</h3>
+                <p className="text-slate-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Project Process */}
+      <section className="py-20 bg-white">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-slate-800">Our Commercial Project Process</h2>
+            <p className="text-slate-600">
+              We follow a proven methodology to ensure every commercial project is completed to the highest standards.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Process Timeline */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-200 -translate-y-1/2"></div>
+
+            <div className="grid md:grid-cols-4 gap-8">
+              {/* Step 1 */}
+              <div className="relative">
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative">
+                  <span className="text-xl font-bold">1</span>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-3 text-slate-800">Consultation</h3>
+                  <p className="text-slate-600">Initial meeting to understand your business needs and project requirements.</p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="relative">
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative">
+                  <span className="text-xl font-bold">2</span>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-3 text-slate-800">Design & Proposal</h3>
+                  <p className="text-slate-600">Comprehensive project planning and detailed cost estimate.</p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="relative">
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative">
+                  <span className="text-xl font-bold">3</span>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-3 text-slate-800">Implementation</h3>
+                  <p className="text-slate-600">Professional installation with minimal disruption to your operations.</p>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="relative">
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative">
+                  <span className="text-xl font-bold">4</span>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-3 text-slate-800">Final Inspection</h3>
+                  <p className="text-slate-600">Thorough testing and quality assurance to ensure everything meets code.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Logos (Trusted By) */}
+      <section className="py-16 bg-slate-50">
+        <div className="container">
+          <h2 className="text-2xl font-bold text-center mb-12 text-slate-800">Trusted By Leading Businesses</h2>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-70">
+            {clients.map((client, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="w-24 h-24 bg-white rounded-lg shadow-sm flex items-center justify-center p-4">
+                  <Building2 className="h-12 w-12 text-slate-400" />
+                </div>
+                <span className="text-sm text-slate-500 mt-2">{client.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section id="contact-section" className="py-20 bg-gradient-to-br from-blue-900 to-blue-700 text-white">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Request a Quote</h2>
-              <Form>
+              <h2 className="text-3xl font-bold mb-6">Request a Commercial Quote</h2>
+              <p className="text-white/80 mb-8">
+                Contact our commercial team to discuss your project needs. We'll provide a detailed quote for your electrical requirements.
+              </p>
+
+              <div className="bg-blue-800/50 rounded-lg p-6 backdrop-blur-sm mb-8">
+                <h3 className="text-xl font-bold mb-4">Why Businesses Choose Us</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-blue-300 shrink-0 mt-0.5" />
+                    <span>Dedicated commercial project managers</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-blue-300 shrink-0 mt-0.5" />
+                    <span>Transparent pricing and detailed proposals</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-blue-300 shrink-0 mt-0.5" />
+                    <span>Fully licensed, bonded, and insured</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-blue-300 shrink-0 mt-0.5" />
+                    <span>Energy-efficient solutions that reduce costs</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <Phone className="h-6 w-6 text-blue-300" />
+                  <div>
+                    <h4 className="font-bold">Call Our Commercial Division</h4>
+                    <p>{business?.basic_info.phone || 'Loading...'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Mail className="h-6 w-6 text-blue-300" />
+                  <div>
+                    <h4 className="font-bold">Email Us</h4>
+                    <p>commercial@{business?.basic_info.name?.toLowerCase().replace(/\s+/g, '') || 'company'}.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Calendar className="h-6 w-6 text-blue-300" />
+                  <div>
+                    <h4 className="font-bold">Schedule a Consultation</h4>
+                    <p>Available Monday-Friday, 8am-5pm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Form onSubmit={handleSubmit} className="bg-white rounded-lg p-8 shadow-lg text-slate-800">
+                <h3 className="text-2xl font-bold mb-6 text-slate-800">Commercial Service Inquiry</h3>
                 <div className="space-y-4">
-                  <Input placeholder="Business Name" />
-                  <Input placeholder="Contact Person" />
-                  <Input placeholder="Email" type="email" />
-                  <Input placeholder="Phone" type="tel" />
-                  <Textarea placeholder="Project Details" rows={4} />
-                  <Button type="submit" size="lg">Get Quote</Button>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-slate-700">Company Name</label>
+                    <Input 
+                      name="companyName" 
+                      value={formData.companyName} 
+                      onChange={handleChange} 
+                      placeholder="Your Company" 
+                      required 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-slate-700">Contact Name</label>
+                    <Input 
+                      name="contactName" 
+                      value={formData.contactName} 
+                      onChange={handleChange} 
+                      placeholder="Your Name" 
+                      required 
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-slate-700">Email</label>
+                      <Input 
+                        name="email" 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        placeholder="Email" 
+                        required 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-slate-700">Phone</label>
+                      <Input 
+                        name="phone" 
+                        type="tel" 
+                        value={formData.phone} 
+                        onChange={handleChange} 
+                        placeholder="Phone" 
+                        required 
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-slate-700">Project Type</label>
+                    <select 
+                      name="projectType" 
+                      value={formData.projectType} 
+                      onChange={handleChange}
+                      className="w-full rounded-md border border-slate-300 py-2 px-3"
+                      required
+                    >
+                      <option value="">Select Project Type</option>
+                      <option value="new-construction">New Construction</option>
+                      <option value="renovation">Renovation/Remodel</option>
+                      <option value="maintenance">Maintenance Contract</option>
+                      <option value="troubleshooting">Troubleshooting/Repair</option>
+                      <option value="energy-audit">Energy Efficiency Audit</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-slate-700">Project Details</label>
+                    <Textarea 
+                      name="message" 
+                      value={formData.message} 
+                      onChange={handleChange} 
+                      placeholder="Describe your project needs" 
+                      rows={4} 
+                      required 
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Submit Inquiry
+                  </Button>
+                  <p className="text-xs text-slate-500 text-center mt-4">
+                    We typically respond to commercial inquiries within 1 business day.
+                  </p>
                 </div>
               </Form>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Commercial Solutions</h2>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-2">
-                  ✓ Office Building Wiring
-                </li>
-                <li className="flex items-center gap-2">
-                  ✓ Emergency Lighting
-                </li>
-                <li className="flex items-center gap-2">
-                  ✓ Data & Network Cabling
-                </li>
-                <li className="flex items-center gap-2">
-                  ✓ Energy Management Systems
-                </li>
-              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <Reviews />
+      {/* Call to Action */}
+      <section className="py-12 bg-slate-800 text-white">
+        <div className="container text-center">
+          <h2 className="text-2xl font-bold mb-4">Ready to Power Your Business?</h2>
+          <p className="text-white/80 max-w-2xl mx-auto mb-8">
+            Our commercial team is ready to help with your next electrical project. Contact us today for a consultation.
+          </p>
+          <Button 
+            size="lg" 
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+            onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
+          >
+            <Phone className="mr-2 h-5 w-5" />
+            {business?.basic_info.phone || 'Call Now'}
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }
