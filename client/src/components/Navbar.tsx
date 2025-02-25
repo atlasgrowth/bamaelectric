@@ -78,26 +78,40 @@ export function Navbar() {
           </Button>
         </div>
         {mobileMenuOpen && (
-          <div className="absolute top-16 left-0 right-0 bg-background border-b border-zinc-200 dark:border-zinc-800 p-4 md:hidden">
+          <div className="absolute top-16 left-0 right-0 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 md:hidden">
             <nav className="flex flex-col space-y-2">
-              <Link href="/bamaelectric/">
-                <Button variant="ghost" className="w-full justify-start">Home</Button>
-              </Link>
-              <Link href="/bamaelectric/residential">
-                <Button variant="ghost" className="w-full justify-start">Residential</Button>
-              </Link>
-              <Link href="/bamaelectric/commercial">
-                <Button variant="ghost" className="w-full justify-start">Commercial</Button>
-              </Link>
-              <Link href="/bamaelectric/industrial">
-                <Button variant="ghost" className="w-full justify-start">Industrial</Button>
-              </Link>
-              <Link href="/bamaelectric/about">
-                <Button variant="ghost" className="w-full justify-start">About</Button>
-              </Link>
-              <Link href="/bamaelectric/contact">
-                <Button variant="ghost" className="w-full justify-start">Contact</Button>
-              </Link>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link href="/">
+                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Home
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/residential">
+                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Residential
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/commercial">
+                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Commercial
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/industrial">
+                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        Industrial
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </nav>
           </div>
         )}
