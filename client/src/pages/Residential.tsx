@@ -188,7 +188,7 @@ export default function Residential() {
     <div className="min-h-screen bg-white dark:bg-zinc-900 transition-colors duration-200">
       {/* Hero Section */}
       <section 
-        className="relative h-[60vh] sm:h-[80vh] bg-cover bg-center flex items-center overflow-hidden" 
+        className="relative h-[85vh] sm:h-[90vh] md:h-screen bg-cover bg-center flex items-center overflow-hidden" 
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000)'
         }}

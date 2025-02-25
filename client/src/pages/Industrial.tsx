@@ -135,7 +135,7 @@ export default function Industrial() {
   return (
     <div className="bg-zinc-900 text-zinc-100">
       {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[80vh] flex items-center bg-black">
+      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen flex items-center bg-black">
         <div
           className="absolute inset-0 z-0"
           style={{
