@@ -80,13 +80,22 @@ export function Navbar() {
         {mobileMenuOpen && (
           <div className="absolute top-16 left-0 right-0 bg-background border-b border-zinc-200 dark:border-zinc-800 p-4 md:hidden">
             <nav className="flex flex-col space-y-2">
-              <Link href="/about">
+              <Link href="/bamaelectric/">
+                <Button variant="ghost" className="w-full justify-start">Home</Button>
+              </Link>
+              <Link href="/bamaelectric/residential">
+                <Button variant="ghost" className="w-full justify-start">Residential</Button>
+              </Link>
+              <Link href="/bamaelectric/commercial">
+                <Button variant="ghost" className="w-full justify-start">Commercial</Button>
+              </Link>
+              <Link href="/bamaelectric/industrial">
+                <Button variant="ghost" className="w-full justify-start">Industrial</Button>
+              </Link>
+              <Link href="/bamaelectric/about">
                 <Button variant="ghost" className="w-full justify-start">About</Button>
               </Link>
-              <Link href="/services">
-                <Button variant="ghost" className="w-full justify-start">Services</Button>
-              </Link>
-              <Link href="/contact">
+              <Link href="/bamaelectric/contact">
                 <Button variant="ghost" className="w-full justify-start">Contact</Button>
               </Link>
             </nav>
