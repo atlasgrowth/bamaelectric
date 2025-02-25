@@ -43,7 +43,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-[60vh] sm:h-[80vh] overflow-hidden">
       {/* Background slides with overlay */}
       {slides.map((slide, index) => (
         <div
