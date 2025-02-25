@@ -80,38 +80,18 @@ export function Navbar() {
         {mobileMenuOpen && (
           <div className="absolute top-16 left-0 right-0 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 md:hidden">
             <nav className="flex flex-col space-y-2">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <Link href="/">
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Home
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link href="/residential">
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Residential
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link href="/commercial">
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Commercial
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link href="/industrial">
-                      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        Industrial
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <Link href="/">
+                <Button variant="ghost" className="w-full justify-start text-sm font-medium text-zinc-900 dark:text-white">Home</Button>
+              </Link>
+              <Link href="/residential">
+                <Button variant="ghost" className="w-full justify-start text-sm font-medium text-zinc-900 dark:text-white">Residential</Button>
+              </Link>
+              <Link href="/commercial">
+                <Button variant="ghost" className="w-full justify-start text-sm font-medium text-zinc-900 dark:text-white">Commercial</Button>
+              </Link>
+              <Link href="/industrial">
+                <Button variant="ghost" className="w-full justify-start text-sm font-medium text-zinc-900 dark:text-white">Industrial</Button>
+              </Link>
             </nav>
           </div>
         )}
