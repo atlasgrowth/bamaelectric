@@ -43,7 +43,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[60vh] sm:h-[80vh] overflow-hidden">
+    <section className="relative h-[85vh] sm:h-[90vh] md:h-screen overflow-hidden">
       {/* Background slides with overlay */}
       {slides.map((slide, index) => (
         <div
@@ -65,33 +65,33 @@ export function Hero() {
       <div className="absolute inset-0 flex items-center">
         <div className="container relative z-10 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
               {slides[currentSlide].title}
             </h1>
-            <p className="text-zinc-200 mb-8">
+            <p className="text-zinc-200 mb-6 sm:mb-8 text-sm sm:text-base">
               {slides[currentSlide].subtitle}
               {business?.basic_info.city && ` in ${business.basic_info.city}`}
             </p>
 
             {/* Improved buttons for mobile consistency */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link href={slides[currentSlide].link} className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
-                  className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto"
+                  className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto py-2 h-auto sm:h-12"
                 >
                   Learn More
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
 
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-black transition-colors w-full sm:w-auto"
+                className="border-white text-white hover:bg-white hover:text-black transition-colors w-full sm:w-auto py-2 h-auto sm:h-12"
                 onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 {business?.basic_info.phone || 'Contact Us'}
               </Button>
             </div>
@@ -99,12 +99,12 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      {/* Slide indicators - positioned higher from bottom on mobile */}
+      <div className="absolute bottom-8 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-colors ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors ${
               currentSlide === index ? "bg-amber-500" : "bg-white/50"
             }`}
             onClick={() => setCurrentSlide(index)}
