@@ -11,26 +11,39 @@ import Residential from "@/pages/Residential";
 import Commercial from "@/pages/Commercial";
 import Industrial from "@/pages/Industrial";
 
-// Minimal hash-based routing
+// Improved hash-based location hook that handles the repository prefix
 const useHashLocation = () => {
-  // Get location from hash only
-  const getLocation = () => window.location.hash.slice(1) || "/";
+  // Helper to normalize paths - removes duplicate repository name
+  const normalizePath = (path: string) => {
+    // If the path starts with /bamaelectric/ (your repo name), strip it off
+    if (path.startsWith('/bamaelectric/')) {
+      path = path.substring('/bamaelectric/'.length);
+    }
+    // Make sure the path starts with a /
+    return path.startsWith('/') ? path : '/' + path;
+  };
 
-  const [loc, setLoc] = React.useState(getLocation);
+  const getHashLocation = () => {
+    // Get the hash without the # symbol
+    const hash = window.location.hash.replace('#', '') || '/';
+    // Normalize the path to remove duplicated repository name
+    return normalizePath(hash);
+  };
+
+  const [location, setLocation] = React.useState(getHashLocation());
 
   React.useEffect(() => {
-    // Update loc when hash changes
-    const onHashChange = () => setLoc(getLocation());
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    const handler = () => setLocation(getHashLocation());
+    window.addEventListener("hashchange", handler);
+    return () => window.removeEventListener("hashchange", handler);
   }, []);
 
-  // Simple navigate function that only updates hash
   const navigate = React.useCallback((to: string) => {
-    window.location.hash = to;
+    // Ensure the path is normalized before navigation
+    window.location.hash = normalizePath(to);
   }, []);
 
-  return [loc, navigate];
+  return [location, navigate] as const;
 };
 
 function AppRouter() {
