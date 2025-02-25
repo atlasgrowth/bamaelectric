@@ -2,22 +2,16 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// Remove the base URL from the hash path to prevent double paths
-const base = import.meta.env.BASE_URL;
-if (window.location.hash.includes(base)) {
-  const newPath = window.location.hash.replace(base, '');
-  window.location.hash = newPath;
-}
-
-// Handle direct navigation for GitHub Pages
+// Handle direct navigation and base URL for GitHub Pages
 window.addEventListener('load', () => {
   const path = window.location.pathname;
+  const base = import.meta.env.BASE_URL;
+  const hash = window.location.hash;
 
-  // If we're on a path other than root and don't have a hash yet
-  if (path !== `${base}` && path !== `${base}index.html` && !window.location.hash) {
-    // Set the hash to the path without the base URL
+  // If we have a path but no hash, convert it to hash-based route
+  if (path !== base && path !== `${base}index.html` && !hash) {
     const pathWithoutBase = path.replace(base, '');
-    window.location.hash = pathWithoutBase || '/';
+    window.location.replace(`${base}#${pathWithoutBase}`);
   }
 });
 

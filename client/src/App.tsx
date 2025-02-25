@@ -1,7 +1,6 @@
 // In App.tsx
 import React from "react";
 import { Switch, Route, Router } from "wouter";
-import { useLocation } from "wouter/use-location";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -15,14 +14,11 @@ import Industrial from "@/pages/Industrial";
 
 // Custom hash-based location hook for GitHub Pages
 const useHashLocation = () => {
-  const [hash, setHash] = React.useState(() => 
-    window.location.hash.replace("#", "") || "/"
-  );
+  const [hash, setHash] = React.useState(() => window.location.hash || "/");
 
   React.useEffect(() => {
     const handleHashChange = () => {
-      const newHash = window.location.hash.replace("#", "") || "/";
-      setHash(newHash);
+      setHash(window.location.hash || "/");
     };
 
     window.addEventListener("hashchange", handleHashChange);
@@ -30,11 +26,11 @@ const useHashLocation = () => {
   }, []);
 
   const navigate = React.useCallback((to: string) => {
-    // Always use relative paths for navigation
+    // Always set the hash without leading slash
     window.location.hash = to.replace(/^\//, '');
   }, []);
 
-  return [hash, navigate] as [string, (to: string) => void];
+  return [hash.replace('#', '') || '/', navigate] as const;
 };
 
 function AppRouter() {
