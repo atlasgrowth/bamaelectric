@@ -325,11 +325,11 @@ const Commercial = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-black dark:bg-zinc-950 text-white" ref={featuresRef}>
+      <section className="py-20 bg-white dark:bg-black" ref={featuresRef}>
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-white dark:text-black">Why Choose Our Commercial Services</h2>
-            <p className="text-zinc-300 dark:text-zinc-400">
+            <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Why Choose Our Commercial Services</h2>
+            <p className="text-zinc-600 dark:text-zinc-300">
               Our commercial electrical team delivers exceptional service, quality workmanship, and innovative solutions for businesses of all sizes.
             </p>
           </div>
@@ -338,15 +338,15 @@ const Commercial = () => {
             {commercialFeatures.map((feature, index) => (
               <div
                 key={index}
-                className={`bg-zinc-900 dark:bg-black border border-zinc-800 rounded-lg p-8 shadow-xl transform transition-all duration-700 hover:shadow-2xl ${
+                className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-8 shadow-lg transform transition-all duration-700 hover:shadow-xl ${
                   visibleFeatures.includes(index)
                     ? 'translate-y-0 opacity-100'
                     : 'translate-y-16 opacity-0'
                 }`}
               >
                 <div className="mb-6">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-3 text-white dark:text-black">{feature.title}</h3>
-                <p className="text-zinc-300 dark:text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-zinc-900 dark:text-white">{feature.title}</h3>
+                <p className="text-zinc-600 dark:text-zinc-300">{feature.description}</p>
               </div>
             ))}
           </div>
