@@ -146,12 +146,13 @@ export default function Industrial() {
           }}
         />
         <div className="container relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl font-bold text-white mb-6">
-              {business?.basic_info.name || 'Professional'} Industrial Services
+          <div className="max-w-2xl">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              {business?.basic_info.name || 'Expert'} Industrial Solutions
             </h1>
-            <p className="text-xl text-zinc-300 mb-8">
-              Powering industry with reliable, efficient, and innovative electrical solutions.
+            <p className="text-zinc-200 mb-8">
+              Complete electrical solutions for industrial facilities by {business?.basic_info.name || 'our professional team'}
+              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600">
@@ -180,9 +181,9 @@ export default function Industrial() {
       >
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-white">Industrial-Strength Electrical Services</h2>
-            <p className="text-zinc-300">
-              Our specialized industrial electrical services are designed for the unique demands and challenges of manufacturing, processing, and heavy industrial environments.
+            <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Industrial Electrical Solutions</h2>
+            <p className="text-zinc-600 dark:text-zinc-300">
+              Comprehensive industrial electrical services tailored to meet the demanding needs of manufacturing and processing facilities.
             </p>
           </div>
 
