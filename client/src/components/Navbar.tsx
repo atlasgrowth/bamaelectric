@@ -1,11 +1,13 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Phone, Moon, Sun } from "lucide-react";
+import { Phone, Moon, Sun, Menu } from "lucide-react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getBusinessData } from "@/lib/utils";
 import { useTheme } from "@/lib/theme-context";
 
 export function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: business } = useQuery({
     queryKey: ['business'],
     queryFn: getBusinessData,
@@ -58,13 +60,38 @@ export function Navbar() {
           </Button>
         </div>
 
-        <Button 
-          className="md:hidden bg-amber-500 hover:bg-amber-600" 
-          variant="default" 
-          size="icon"
-        >
-          <Phone className="h-4 w-4 text-black" />
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            className="md:hidden bg-amber-500 hover:bg-amber-600" 
+            variant="default" 
+            size="icon"
+          >
+            <Phone className="h-4 w-4 text-black" />
+          </Button>
+          <Button
+            className="md:hidden"
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
+        {mobileMenuOpen && (
+          <div className="absolute top-16 left-0 right-0 bg-background border-b border-zinc-200 dark:border-zinc-800 p-4 md:hidden">
+            <nav className="flex flex-col space-y-2">
+              <Link href="/about">
+                <Button variant="ghost" className="w-full justify-start">About</Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="ghost" className="w-full justify-start">Services</Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="ghost" className="w-full justify-start">Contact</Button>
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
     </nav>
   );
