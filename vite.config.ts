@@ -32,9 +32,8 @@ export default defineConfig({
     },
   },
   root: path.resolve(__dirname, "client"),
-  // Since you're using hash-based routing, the base can be '/'
-  // If you encounter asset loading issues, you can change to `/${repoName}/`
-  base: '/',
+  // Changed base to include the repository name for GitHub Pages
+  base: `/${repoName}/`,
   build: {
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
