@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Reviews } from "@/components/Reviews";
 import { useQuery } from "@tanstack/react-query";
 import { getBusinessData } from "@/lib/utils";
@@ -14,7 +11,9 @@ import {
   Lightbulb,
   BatteryCharging,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Shield,
+  Zap
 } from "lucide-react";
 
 export default function Residential() {
@@ -22,14 +21,6 @@ export default function Residential() {
     queryKey: ['business'],
     queryFn: getBusinessData,
     retry: false
-  });
-
-  // Form state
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
   });
 
   // Animation tracking
@@ -52,19 +43,6 @@ export default function Residential() {
     homes: 0,
     years: 0
   });
-
-  // Handle form changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your message. We'll be in touch shortly!");
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
 
   // Set up intersection observers
   useEffect(() => {
@@ -93,7 +71,6 @@ export default function Residential() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
     if (servicesRef.current) observer.observe(servicesRef.current);
     if (featuresRef.current) observer.observe(featuresRef.current);
     if (testimonialsRef.current) observer.observe(testimonialsRef.current);
@@ -112,31 +89,26 @@ export default function Residential() {
     const duration = 2000; // ms
     const steps = 60;
     const stepTime = duration / steps;
-
     const targetValues = {
       clients: 2500,
       homes: 4800,
       years: 25
     };
-
     let currentStep = 0;
-
     const interval = setInterval(() => {
       currentStep++;
-
       setCounters({
         clients: Math.floor((currentStep / steps) * targetValues.clients),
         homes: Math.floor((currentStep / steps) * targetValues.homes),
         years: Math.floor((currentStep / steps) * targetValues.years)
       });
-
       if (currentStep >= steps) {
         clearInterval(interval);
       }
     }, stepTime);
   };
 
-  // Service card data
+  // Service card data - now with 6 cards total
   const serviceCards = [
     {
       icon: <WrenchIcon className="h-10 w-10 text-amber-500" />,
@@ -185,6 +157,30 @@ export default function Residential() {
         "Wireless control installations"
       ],
       color: "from-amber-800 to-amber-900"
+    },
+    {
+      icon: <Shield className="h-10 w-10 text-amber-500" />,
+      title: "Safety Inspections",
+      description: "Comprehensive electrical safety inspections to identify potential hazards and ensure your home's electrical system is up to code.",
+      details: [
+        "Full system safety audits",
+        "Smoke detector installation",
+        "Childproofing solutions",
+        "GFCI outlet installation"
+      ],
+      color: "from-amber-500 to-amber-700"
+    },
+    {
+      icon: <Zap className="h-10 w-10 text-amber-500" />,
+      title: "Surge Protection",
+      description: "Protect your valuable electronics and appliances with whole-home surge protection systems designed for maximum safety.",
+      details: [
+        "Whole-home surge protection",
+        "Power conditioning systems",
+        "Equipment safeguards",
+        "Lightning protection"
+      ],
+      color: "from-amber-600 to-amber-800"
     }
   ];
 
@@ -198,7 +194,6 @@ export default function Residential() {
         }}
       >
         <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
-
         <div className="container relative z-10">
           <div className="max-w-2xl">
             <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
@@ -215,10 +210,7 @@ export default function Residential() {
               <Button 
                 size="lg" 
                 className="bg-amber-500 hover:bg-amber-600 text-black"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact-section');
-                  contactSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
               >
                 Get a Free Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -249,8 +241,7 @@ export default function Residential() {
               Comprehensive electrical services for homeowners, focusing on safety, quality, and customer satisfaction.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Updated grid columns for better responsiveness */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {serviceCards.map((service, index) => (
               <div 
                 key={index}
@@ -261,7 +252,7 @@ export default function Residential() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className=""> {/* Removed unnecessary bg-zinc-800 class */}
+                <div className="">
                   <div className="mb-4">
                     <div className="text-amber-500">{service.icon}</div>
                   </div>
@@ -282,117 +273,6 @@ export default function Residential() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact-section" className="py-20 bg-zinc-900 dark:bg-black text-white">
-        <div className="container">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-              <p className="text-zinc-300 mb-8">
-                Contact us today to schedule a service, request a free estimate, or inquire about any of our residential electrical services.
-              </p>
-
-              <div className="bg-zinc-800 dark:bg-zinc-900/50 rounded-lg p-6 mb-8 border border-zinc-700">
-                <h3 className="text-xl font-bold mb-4">Why Choose Our Services?</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span className="text-zinc-300">Expert electricians with years of experience</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span className="text-zinc-300">100% satisfaction guarantee on all services</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span className="text-zinc-300">Transparent pricing with no hidden fees</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                    <span className="text-zinc-300">Fast, reliable service when you need it most</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Phone className="h-8 w-8 text-amber-500" />
-                <div>
-                  <h4 className="font-bold text-lg">Call Us Directly</h4>
-                  <p className="text-zinc-300">{business?.basic_info.phone || 'Loading...'}</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Form onSubmit={handleSubmit} className="bg-zinc-800 dark:bg-zinc-900 rounded-lg p-8 shadow-xl border border-zinc-700">
-                <h3 className="text-2xl font-bold mb-6 text-white">Request a Free Quote</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-zinc-300">Your Name</label>
-                    <Input 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleChange} 
-                      placeholder="Your Name" 
-                      required 
-                      className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1 text-zinc-300">Email</label>
-                      <Input 
-                        name="email" 
-                        type="email" 
-                        value={formData.email} 
-                        onChange={handleChange} 
-                        placeholder="Email" 
-                        required 
-                        className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1 text-zinc-300">Phone</label>
-                      <Input 
-                        name="phone" 
-                        type="tel" 
-                        value={formData.phone} 
-                        onChange={handleChange} 
-                        placeholder="Phone" 
-                        required 
-                        className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-zinc-300">How Can We Help?</label>
-                    <Textarea 
-                      name="message" 
-                      value={formData.message} 
-                      onChange={handleChange} 
-                      placeholder="Describe your electrical needs..." 
-                      rows={4} 
-                      required 
-                      className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400"
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold"
-                  >
-                    Submit Request
-                  </Button>
-                  <p className="text-xs text-zinc-400 text-center">
-                    We typically respond to inquiries within 24 hours.
-                  </p>
-                </div>
-              </Form>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Reviews Section */}
       <div className="reviews-section">
         <Reviews />
@@ -409,10 +289,7 @@ export default function Residential() {
             <Button 
               size="lg" 
               className="bg-amber-500 hover:bg-amber-600 text-black"
-              onClick={() => {
-                const contactSection = document.getElementById('contact-section');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
             >
               Get a Free Quote
             </Button>
