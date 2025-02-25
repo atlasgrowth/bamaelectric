@@ -46,10 +46,11 @@ export function Reviews() {
         backgroundImage: 'url(https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65147cb9c9753e3d02a73bf9.jpeg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'scroll',
+        backgroundColor: '#1a1a1a'
       }}
     >
-      <div className="absolute inset-0 bg-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-black/95" />
       <div className="container relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-white mb-4">What Our Customers Say</h2>

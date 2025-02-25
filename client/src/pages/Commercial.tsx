@@ -334,7 +334,7 @@ const Commercial = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white dark:bg-black" ref={featuresRef}>
+      <section className="py-20 bg-gradient-to-b from-zinc-900 to-zinc-800" ref={featuresRef}>
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Why Choose Our Commercial Services</h2>
