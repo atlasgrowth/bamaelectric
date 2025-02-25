@@ -61,8 +61,8 @@ export function Hero() {
       ))}
 
       <div className="absolute inset-0 flex items-center">
-        <div className="container">
-          <div className="max-w-3xl">
+        <div className="container relative z-10 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               {slides[currentSlide].title}
             </h1>
