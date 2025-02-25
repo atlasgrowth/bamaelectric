@@ -1,10 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useQuery } from "@tanstack/react-query";
-import { getBusinessData } from "@/lib/utils";
 import { 
   Factory, 
   Power, 
@@ -21,21 +16,14 @@ import {
   CheckCircle,
   Building2
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getBusinessData } from "@/lib/utils";
 
 export default function Industrial() {
   const { data: business } = useQuery({
     queryKey: ['business'],
     queryFn: getBusinessData,
     retry: false
-  });
-
-  const [formData, setFormData] = useState({
-    companyName: "",
-    contactName: "",
-    email: "",
-    phone: "",
-    facilityType: "",
-    message: ""
   });
 
   const [visibleSections, setVisibleSections] = useState({
@@ -48,62 +36,31 @@ export default function Industrial() {
   const benefitsRef = useRef(null);
   const expertiseRef = useRef(null);
 
-  // Handle form changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your inquiry. Our industrial team will contact you shortly!");
-    setFormData({
-      companyName: "",
-      contactName: "",
-      email: "",
-      phone: "",
-      facilityType: "",
-      message: ""
-    });
-  };
-
-  // Intersection observer setup
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.target === servicesRef.current) {
-            setVisibleSections(prev => ({ ...prev, services: true }));
-          } else if (entry.target === benefitsRef.current) {
-            setVisibleSections(prev => ({ ...prev, benefits: true }));
-          } else if (entry.target === expertiseRef.current) {
-            setVisibleSections(prev => ({ ...prev, expertise: true }));
+            setVisibleSections(prev => ({ ...prev, services: entry.isIntersecting }));
           }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+          if (entry.target === benefitsRef.current) {
+            setVisibleSections(prev => ({ ...prev, benefits: entry.isIntersecting }));
+          }
+          if (entry.target === expertiseRef.current) {
+            setVisibleSections(prev => ({ ...prev, expertise: entry.isIntersecting }));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
     if (servicesRef.current) observer.observe(servicesRef.current);
     if (benefitsRef.current) observer.observe(benefitsRef.current);
     if (expertiseRef.current) observer.observe(expertiseRef.current);
 
-    return () => {
-      if (servicesRef.current) observer.unobserve(servicesRef.current);
-      if (benefitsRef.current) observer.unobserve(benefitsRef.current);
-      if (expertiseRef.current) observer.unobserve(expertiseRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // Industrial services
   const industrialServices = [
     {
       icon: <Power className="h-10 w-10 text-orange-500" />,
@@ -137,21 +94,9 @@ export default function Industrial() {
         "Control panel design",
         "Process automation solutions"
       ]
-    },
-    {
-      icon: <Shield className="h-10 w-10 text-orange-500" />,
-      title: "Hazardous Location Services",
-      description: "Specialized electrical installations for hazardous environments (Class I, II, III locations) in accordance with NEC standards.",
-      details: [
-        "Explosion-proof installations",
-        "Intrinsically safe systems",
-        "Chemical plant wiring",
-        "Hazardous area classifications"
-      ]
     }
   ];
 
-  // Benefits
   const benefits = [
     {
       title: "Minimize Downtime",
@@ -190,34 +135,30 @@ export default function Industrial() {
   return (
     <div className="bg-zinc-900 text-zinc-100">
       {/* Hero Section */}
-      <section 
-        className="relative min-h-[80vh] bg-cover bg-center flex items-center" 
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1581094488379-26df9ff34520?auto=format&fit=crop&q=80&w=2000)',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/95 via-zinc-900/80 to-zinc-900/90" />
+      <section className="relative h-[60vh] flex items-center bg-black">
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=2000')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.4
+          }}
+        />
         <div className="container relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-block bg-orange-600 text-white px-4 py-1 rounded-md text-sm font-medium mb-4">
-              INDUSTRIAL ELECTRICAL SERVICES
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Heavy-Duty Electrical Solutions
+            <h1 className="text-5xl font-bold text-white mb-6">
+              Industrial Electrical Solutions
             </h1>
             <p className="text-xl text-zinc-300 mb-8">
-              Industrial-grade electrical solutions by {business?.basic_info.name || 'our specialized team'} 
-              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''} for manufacturing, processing, and industrial facilities.
+              Powering industry with reliable, efficient, and innovative electrical solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="bg-orange-600 hover:bg-orange-700 text-white border-none"
-                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                {business?.basic_info.phone || 'Contact Industrial Division'}
+              <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
+                <a href={`tel:${business?.basic_info.phone}`}>
+                  <Phone className="mr-2 h-5 w-5" />
+                  {business?.basic_info.phone || 'Contact Industrial Division'}
+                </a>
               </Button>
               <Button 
                 size="lg" 
@@ -225,7 +166,9 @@ export default function Industrial() {
                 className="border-white text-white hover:bg-white hover:text-zinc-900"
                 onClick={() => {
                   const contactSection = document.getElementById('industrial-contact');
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }}
               >
                 Request Site Assessment
@@ -267,41 +210,23 @@ export default function Industrial() {
                     <div>
                       <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
                       <p className="text-zinc-300 mb-6">{service.description}</p>
+                      <ul className="space-y-2">
+                        {service.details.map((detail, idx) => (
+                          <li key={idx} className="flex items-center text-zinc-400">
+                            <Check className="h-5 w-5 text-orange-500 mr-2" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-
-                  <div className="mt-6 pl-16">
-                    <h4 className="text-lg font-bold text-white mb-3">Included Services:</h4>
-                    <ul className="grid grid-cols-2 gap-2">
-                      {service.details.map((detail, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-orange-500 shrink-0 mt-0.5" />
-                          <span className="text-zinc-300">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                {/* Image section below service description */}
-                <div 
-                  className="h-48 bg-cover bg-center relative"
-                  style={{
-                    backgroundImage: index === 0 
-                      ? 'url(https://images.unsplash.com/photo-1581094288379-26df9ff34520?auto=format&fit=crop&q=80&w=1200)' 
-                      : index === 1
-                        ? 'url(https://images.unsplash.com/photo-1616696038562-574c095f1019?auto=format&fit=crop&q=80&w=1200)'
-                        : index === 2
-                          ? 'url(https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&q=80&w=1200)'
-                          : 'url(https://images.unsplash.com/photo-1542621323-be453184db76?auto=format&fit=crop&q=80&w=1200)'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-60"></div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Benefits Section */}
       <section 
@@ -595,3 +520,45 @@ export default function Industrial() {
                 <img 
                   src="https://images.unsplash.com/photo-1531256379416-9f000e90aacc?auto=format&fit=crop&q=80&w=600" 
                   alt="Food Processing"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-80"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-lg font-bold text-white">Food Processing</h3>
+              </div>
+            </div>
+
+            <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
+              <div className="aspect-square">
+                <img 
+                  src="https://images.unsplash.com/photo-1560274487-6c50a758c829?auto=format&fit=crop&q=80&w=600" 
+                  alt="Warehouses"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-80"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-lg font-bold text-white">Warehouses & Distribution</h3>
+              </div>
+            </div>
+
+            <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
+              <div className="aspect-square">
+                <img 
+                  src="https://images.unsplash.com/photo-1574681957670-f09a73e4a09f?auto=format&fit=crop&q=80&w=600" 
+                  alt="Water Treatment"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-80"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-lg font-bold text-white">Water Treatment</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
