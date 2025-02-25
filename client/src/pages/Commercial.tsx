@@ -363,7 +363,10 @@ const Commercial = () => {
           </div>
 
           <div className="relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2"></div>
+            {/* Process Timeline - Desktop */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 rounded-full">
+              <div className="absolute top-0 left-0 h-full w-0 bg-amber-500 rounded-full transition-all duration-1000" style={{ width: visibleSections.process ? '100%' : '0%' }}></div>
+            </div>
 
             <div className="grid md:grid-cols-4 gap-8">
               {[

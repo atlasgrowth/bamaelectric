@@ -266,51 +266,6 @@ export default function Industrial() {
             ))}
           </div>
 
-          {/* Client Success Story */}
-          <div className={`mt-16 bg-zinc-900/70 backdrop-blur-sm p-8 rounded-lg border border-zinc-700 transition-all duration-1000 ${
-            visibleSections.benefits
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-16 opacity-0'
-          }`} style={{ transitionDelay: '400ms' }}>
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="md:w-1/3">
-                <div className="relative rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1586528116493-a029325540b6?auto=format&fit=crop&q=80&w=800"
-                    alt="Industrial facility"
-                    className="w-full aspect-video object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/60 to-transparent"></div>
-                </div>
-              </div>
-              <div className="md:w-2/3">
-                <div className="inline-block bg-amber-600/20 border border-amber-600/50 text-amber-300 px-3 py-1 rounded-md text-sm font-medium mb-2">
-                  SUCCESS STORY
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Midwest Manufacturing Plant Upgrade</h3>
-                <p className="text-zinc-300 mb-4">
-                  We completed a comprehensive electrical system overhaul for a 120,000 sq ft manufacturing facility, upgrading from outdated systems to modern, energy-efficient solutions while maintaining continuous operations.
-                </p>
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-amber-500">40%</div>
-                    <div className="text-sm text-zinc-400">Energy Savings</div>
-                  </div>
-                  <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-amber-500">0</div>
-                    <div className="text-sm text-zinc-400">Production Downtime</div>
-                  </div>
-                  <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-amber-500">3x</div>
-                    <div className="text-sm text-zinc-400">Capacity Increase</div>
-                  </div>
-                </div>
-                <div className="text-zinc-300">
-                  <span className="font-bold text-white">Client:</span> Major Midwest Manufacturing Company
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
