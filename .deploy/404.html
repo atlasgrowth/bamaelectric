@@ -1,12 +1,41 @@
+<!-- 404.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Redirecting...</title>
   <script>
-    // Redirect to the home page with the current path as a hash
-    var path = window.location.pathname;
-    window.location.href = '/#' + path;
+    // Single Page App for GitHub Pages
+    // This script efficiently handles 404s by redirecting to the index page with hash routing
+    (function() {
+      // Get the repository name from the path
+      var repoName = 'bamaelectric';
+
+      // Get the current path
+      var path = window.location.pathname;
+      var searchParams = window.location.search || '';
+
+      // Remove the repo name from the path if it exists
+      if (path.indexOf('/' + repoName + '/') === 0) {
+        path = path.substr(('/' + repoName + '/').length);
+      }
+
+      // Make sure path starts with /
+      if (!path.startsWith('/') && path !== '') {
+        path = '/' + path;
+      }
+
+      // If path is empty or just the repo part, use root
+      if (path === '' || path === '/') {
+        path = '/';
+      }
+
+      // Construct the redirect URL
+      var redirectTo = window.location.origin + '/' + repoName + '/#' + path + searchParams;
+
+      // Redirect
+      window.location.replace(redirectTo);
+    })();
   </script>
 </head>
 <body>

@@ -1,3 +1,4 @@
+// App.tsx
 import React from "react";
 import { Switch, Route, Router } from "wouter";
 import { queryClient } from "./lib/queryClient";
@@ -11,9 +12,9 @@ import Residential from "@/pages/Residential";
 import Commercial from "@/pages/Commercial";
 import Industrial from "@/pages/Industrial";
 
-// Improved hash-based location hook that handles the repository prefix
+// Enhanced hash-based location hook that properly handles both search params and hash routing
 const useHashLocation = () => {
-  // Helper to normalize paths - removes duplicate repository name
+  // Helper to normalize paths and handle repository name conflicts
   const normalizePath = (path: string) => {
     // If the path starts with /bamaelectric/ (your repo name), strip it off
     if (path.startsWith('/bamaelectric/')) {
@@ -23,6 +24,7 @@ const useHashLocation = () => {
     return path.startsWith('/') ? path : '/' + path;
   };
 
+  // Get current hash location with proper parsing
   const getHashLocation = () => {
     // Get the hash without the # symbol
     const hash = window.location.hash.replace('#', '') || '/';
@@ -33,14 +35,32 @@ const useHashLocation = () => {
   const [location, setLocation] = React.useState(getHashLocation());
 
   React.useEffect(() => {
+    // Handle initial load - move search params to hash if needed
+    if (!window.location.hash && window.location.search) {
+      const searchParams = window.location.search;
+      window.location.hash = '/';
+      // We return early as the hash change will trigger our handler
+      return;
+    }
+
     const handler = () => setLocation(getHashLocation());
     window.addEventListener("hashchange", handler);
     return () => window.removeEventListener("hashchange", handler);
   }, []);
 
   const navigate = React.useCallback((to: string) => {
+    // Handle search params if present in the destination
+    let path = to;
+    let search = '';
+
+    if (to.includes('?')) {
+      const [pathPart, searchPart] = to.split('?');
+      path = pathPart;
+      search = '?' + searchPart;
+    }
+
     // Ensure the path is normalized before navigation
-    window.location.hash = normalizePath(to);
+    window.location.hash = normalizePath(path) + search;
   }, []);
 
   return [location, navigate] as const;

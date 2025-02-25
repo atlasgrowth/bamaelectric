@@ -1,26 +1,32 @@
+// Hero.jsx
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 import { getBusinessData } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [, navigate] = useLocation();
+
   const { data: business } = useQuery({
     queryKey: ['business'],
     queryFn: getBusinessData,
     retry: false
   });
 
-  // Add this function to properly handle URL parameters
-  const getUrlWithParams = (path) => {
-    // Get the current search params
-    const currentParams = new URLSearchParams(window.location.search);
-    const businessId = currentParams.get('s');
+  // Specialized navigation function that preserves business ID
+  const navigateTo = (path) => {
+    // Extract business ID from current URL
+    const searchParams = new URLSearchParams(window.location.search);
+    const businessId = searchParams.get('s');
 
-    // Only add the parameter if it exists
-    return businessId ? `${path}?s=${businessId}` : path;
+    // Add the business ID to the destination path if it exists
+    const destination = businessId ? `${path}?s=${businessId}` : path;
+
+    // Use the navigate function from wouter which will use our custom hook
+    navigate(destination);
   };
 
   const slides = [
@@ -82,11 +88,13 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black">
-                <Link href={getUrlWithParams(slides[currentSlide].link)}>
-                  Learn More
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+              <Button 
+                size="lg" 
+                className="bg-yellow-400 hover:bg-yellow-500 text-black"
+                onClick={() => navigateTo(slides[currentSlide].link)}
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
 
               <Button 
