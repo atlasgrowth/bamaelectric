@@ -6,6 +6,9 @@ echo "🚀 Starting comprehensive GitHub deployment process..."
 # Get current date for commit messages
 DEPLOY_DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
+# Configure git to use token-based authentication
+git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+
 # Step 1: Initialize git if not already initialized
 if [ ! -d .git ]; then
   echo "Initializing git repository..."
