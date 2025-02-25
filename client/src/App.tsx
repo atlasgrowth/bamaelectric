@@ -1,6 +1,6 @@
-// In App.tsx
 import React from "react";
-import { Switch, Route, Router } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import makeHashRouter from "wouter/hash";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -12,26 +12,7 @@ import Residential from "@/pages/Residential";
 import Commercial from "@/pages/Commercial";
 import Industrial from "@/pages/Industrial";
 
-// Custom hash-based location hook for GitHub Pages
-const useHashLocation = () => {
-  const [hash, setHash] = React.useState(() => window.location.hash || "/");
-
-  React.useEffect(() => {
-    const handleHashChange = () => {
-      setHash(window.location.hash || "/");
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  const navigate = React.useCallback((to: string) => {
-    // Always set the hash without leading slash
-    window.location.hash = to.replace(/^\//, '');
-  }, []);
-
-  return [hash.replace('#', '') || '/', navigate] as const;
-};
+const HashRouter = makeHashRouter(useLocation);
 
 function AppRouter() {
   return (
@@ -54,9 +35,9 @@ function AppRouter() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router hook={useHashLocation}>
+      <HashRouter>
         <AppRouter />
-      </Router>
+      </HashRouter>
       <Toaster />
     </QueryClientProvider>
   );
