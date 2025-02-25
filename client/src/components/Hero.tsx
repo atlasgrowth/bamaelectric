@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { getBusinessData } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -11,12 +12,6 @@ export function Hero() {
     queryFn: getBusinessData,
     retry: false
   });
-
-  // Simple navigation function that matches how your navbar works
-  const handleNavigation = (path) => {
-    // Just set the hash directly, keeping the existing URL structure
-    window.location.hash = path;
-  };
 
   const slides = [
     {
@@ -77,14 +72,13 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="bg-yellow-400 hover:bg-yellow-500 text-black"
-                onClick={() => handleNavigation(slides[currentSlide].link)}
-              >
-                Learn More
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              {/* Use the exact same Link component your navbar uses */}
+              <Link href={slides[currentSlide].link}>
+                <Button size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black">
+                  Learn More
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
 
               <Button 
                 size="lg" 
