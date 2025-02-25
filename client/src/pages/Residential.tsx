@@ -250,38 +250,31 @@ export default function Residential() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Updated grid columns for better responsiveness */}
             {serviceCards.map((service, index) => (
               <div 
                 key={index}
-                className={`rounded-lg overflow-hidden transition-all duration-1000 ${
+                className={`rounded-lg overflow-hidden transition-all duration-1000 bg-white dark:bg-zinc-900 p-6 shadow-lg border border-zinc-200 dark:border-zinc-800 transition-colors duration-200 ${
                   visibleSections.services 
                     ? 'translate-y-0 opacity-100' 
                     : index % 2 === 0 ? 'translate-y-20 opacity-0' : '-translate-y-20 opacity-0'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="bg-zinc-800 dark:bg-zinc-900 p-8 h-full border border-zinc-700">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-zinc-900/50 dark:bg-black/50 p-3 rounded-lg">
-                      <div className="text-amber-500">{service.icon}</div>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
-                      <p className="text-zinc-300 mb-6">{service.description}</p>
-                    </div>
+                <div className=""> {/* Removed unnecessary bg-zinc-800 class */}
+                  <div className="mb-4">
+                    <div className="text-amber-500">{service.icon}</div>
                   </div>
-
-                  <div className="mt-6 pl-16">
-                    <ul className="grid grid-cols-2 gap-2">
-                      {service.details.map((detail, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                          <span className="text-zinc-300">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <h3 className="text-2xl font-bold mb-3 text-zinc-900 dark:text-white">{service.title}</h3>
+                  <p className="text-zinc-600 dark:text-zinc-300 mb-6">{service.description}</p>
+                  <ul className="grid grid-cols-2 gap-2">
+                    {service.details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+                        <span className="text-zinc-300">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
