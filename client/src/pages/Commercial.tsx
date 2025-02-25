@@ -328,8 +328,8 @@ const Commercial = () => {
       <section className="py-20 bg-black dark:bg-zinc-950 text-white" ref={featuresRef}>
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Our Commercial Services</h2>
-            <p className="text-zinc-300">
+            <h2 className="text-3xl font-bold mb-4 text-white dark:text-black">Why Choose Our Commercial Services</h2>
+            <p className="text-zinc-300 dark:text-zinc-400">
               Our commercial electrical team delivers exceptional service, quality workmanship, and innovative solutions for businesses of all sizes.
             </p>
           </div>
@@ -345,8 +345,8 @@ const Commercial = () => {
                 }`}
               >
                 <div className="mb-6">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-3 text-white">{feature.title}</h3>
-                <p className="text-zinc-300">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-white dark:text-black">{feature.title}</h3>
+                <p className="text-zinc-300 dark:text-gray-400">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -391,13 +391,13 @@ const Commercial = () => {
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-              <p className="text-zinc-300 mb-8">
+              <h2 className="text-4xl font-bold mb-6 text-white dark:text-black">Get in Touch</h2>
+              <p className="text-zinc-300 dark:text-zinc-400 mb-8">
                 Contact our commercial team to discuss your project needs.
               </p>
 
               <div className="bg-zinc-900 dark:bg-black border border-zinc-800 rounded-lg p-6 mb-8">
-                <h3 className="text-xl font-bold mb-4">Why Businesses Choose Us</h3>
+                <h3 className="text-xl font-bold mb-4 text-white dark:text-black">Why Businesses Choose Us</h3>
                 <ul className="space-y-3">
                   {[
                     "Dedicated commercial project managers",
@@ -407,7 +407,7 @@ const Commercial = () => {
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
-                      <span className="text-zinc-300">{item}</span>
+                      <span className="text-zinc-300 dark:text-zinc-400">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -422,8 +422,8 @@ const Commercial = () => {
                   <div key={index} className="flex items-center gap-4">
                     {item.icon}
                     <div>
-                      <h4 className="font-bold">{item.title}</h4>
-                      <p className="text-zinc-300">{item.content}</p>
+                      <h4 className="font-bold text-white dark:text-black">{item.title}</h4>
+                      <p className="text-zinc-300 dark:text-zinc-400">{item.content}</p>
                     </div>
                   </div>
                 ))}
@@ -431,10 +431,10 @@ const Commercial = () => {
             </div>
 
             <Form onSubmit={handleSubmit} className="bg-zinc-900 dark:bg-black rounded-lg p-8 shadow-xl border border-zinc-800">
-              <h3 className="text-2xl font-bold mb-6">Commercial Service Inquiry</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white dark:text-black">Commercial Service Inquiry</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-white">Company Name</label>
+                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Company Name</label>
                   <Input
                     name="companyName"
                     value={formData.companyName}
@@ -445,7 +445,7 @@ const Commercial = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-white">Contact Name</label>
+                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Contact Name</label>
                   <Input
                     name="contactName"
                     value={formData.contactName}
@@ -457,7 +457,7 @@ const Commercial = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-white">Email</label>
+                    <label className="block text-sm font-medium mb-1 text-white dark:text-black">Email</label>
                     <Input
                       name="email"
                       type="email"
@@ -469,7 +469,7 @@ const Commercial = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-white">Phone</label>
+                    <label className="block text-sm font-medium mb-1 text-white dark:text-black">Phone</label>
                     <Input
                       name="phone"
                       type="tel"
@@ -482,7 +482,7 @@ const Commercial = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-white">Project Type</label>
+                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Project Type</label>
                   <select
                     name="projectType"
                     value={formData.projectType}
@@ -500,7 +500,7 @@ const Commercial = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-white">Project Details</label>
+                  <label className="block text-sm font-medium mb-1 text-white dark:text-black">Project Details</label>
                   <Textarea
                     name="message"
                     value={formData.message}

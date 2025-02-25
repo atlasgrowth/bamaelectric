@@ -271,7 +271,7 @@ export default function Residential() {
                     {service.details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                        <span className="text-zinc-300">{detail}</span>
+                        <span className="text-zinc-900 dark:text-zinc-300">{detail}</span>
                       </li>
                     ))}
                   </ul>
