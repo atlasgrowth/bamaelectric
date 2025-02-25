@@ -15,7 +15,7 @@ export function Hero() {
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000",
+      image: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
       title: "Residential Electrical Services",
       subtitle: `${business?.basic_info.name || 'Professional'} residential electrical solutions for your home`,
       link: "/residential"
@@ -27,7 +27,7 @@ export function Hero() {
       link: "/commercial"
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbM6AgTt8Za_p0YZAXT-_mFnmqCPuLc7HxwA&s",
+      image: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg",
       title: "Industrial Electrical Services",
       subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
       link: "/industrial"
