@@ -92,6 +92,17 @@ export function Navbar() {
               <Link href="/industrial">
                 <Button variant="ghost" className="w-full justify-start text-sm font-medium text-zinc-900 dark:text-white">Industrial</Button>
               </Link>
+              <Button
+                variant="ghost"
+                onClick={toggleTheme}
+                className="w-full justify-start"
+              >
+                {theme === 'dark' ? (
+                  <><Sun className="h-5 w-5 text-amber-400 mr-2" /> Light Mode</>
+                ) : (
+                  <><Moon className="h-5 w-5 text-amber-500 mr-2" /> Dark Mode</>
+                )}
+              </Button>
             </nav>
           </div>
         )}
