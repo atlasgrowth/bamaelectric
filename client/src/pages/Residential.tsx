@@ -187,15 +187,16 @@ export default function Residential() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 transition-colors duration-200">
       {/* Hero Section */}
-      <section 
-        className="relative h-[85vh] sm:h-[90vh] md:h-screen bg-cover bg-center flex items-center overflow-hidden" 
-        style={{
-          backgroundImage: 'url(https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
+      <section className="relative h-[85vh] sm:h-[90vh] md:h-screen flex items-center bg-black">
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.4
+          }}
+        />
         <div className="container relative z-10">
           <div className="max-w-2xl">
             <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
