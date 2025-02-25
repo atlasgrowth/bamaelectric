@@ -4,13 +4,21 @@
 
 @layer base {
   :root {
-    --background: white;
-    --foreground: theme('colors.zinc.900');
+    --background: theme('colors.white');
+    --foreground: theme('colors.black');
+    --muted: theme('colors.zinc.100');
+    --muted-foreground: theme('colors.zinc.500');
+    --border: theme('colors.zinc.200');
+    --ring: theme('colors.amber.500');
   }
 
   .dark {
-    --background: theme('colors.zinc.900');
-    --foreground: white;
+    --background: theme('colors.black');
+    --foreground: theme('colors.white');
+    --muted: theme('colors.zinc.900');
+    --muted-foreground: theme('colors.zinc.400');
+    --border: theme('colors.zinc.800');
+    --ring: theme('colors.amber.500');
   }
 
   * {
@@ -35,17 +43,32 @@
 }
 
 .bg-section-dark {
-  @apply bg-zinc-900 dark:bg-black;
+  @apply bg-black dark:bg-black text-white;
 }
 
 .bg-section-light {
-  @apply bg-white dark:bg-zinc-900;
+  @apply bg-white dark:bg-black text-black dark:text-white;
 }
 
 .text-section-dark {
-  @apply text-white dark:text-zinc-200;
+  @apply text-white dark:text-white;
 }
 
 .text-section-light {
-  @apply text-zinc-900 dark:text-white;
+  @apply text-black dark:text-white;
+}
+
+/* Add smooth transitions for all theme changes */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Override any remaining gradients or background colors */
+[class*='from-amber-900'],
+[class*='to-amber-900'],
+[class*='from-orange'],
+[class*='to-orange'],
+[class*='from-blue'],
+[class*='to-blue'] {
+  @apply from-black to-black dark:from-black dark:to-black;
 }

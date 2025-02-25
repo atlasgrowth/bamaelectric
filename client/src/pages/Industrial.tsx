@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-  Factory, 
-  Power, 
-  AlertCircle, 
-  Bolt, 
-  Shield, 
-  Cpu, 
-  Gauge, 
-  Wrench, 
-  Cable, 
+import {
+  Factory,
+  Power,
+  AlertCircle,
+  Bolt,
+  Shield,
+  Cpu,
+  Gauge,
+  Wrench,
+  Cable,
   Phone,
   Check,
   Clock,
@@ -63,7 +63,7 @@ export default function Industrial() {
 
   const industrialServices = [
     {
-      icon: <Power className="h-10 w-10 text-orange-500" />,
+      icon: <Power className="h-10 w-10 text-amber-500" />,
       title: "Power Distribution",
       description: "Complete design and installation of industrial power distribution systems, including transformers, switchgear, and distribution panels.",
       details: [
@@ -74,7 +74,7 @@ export default function Industrial() {
       ]
     },
     {
-      icon: <Bolt className="h-10 w-10 text-orange-500" />,
+      icon: <Bolt className="h-10 w-10 text-amber-500" />,
       title: "Industrial Machinery Wiring",
       description: "Expert wiring and installation for manufacturing equipment, production lines, and heavy machinery to ensure optimal performance.",
       details: [
@@ -85,7 +85,7 @@ export default function Industrial() {
       ]
     },
     {
-      icon: <Cpu className="h-10 w-10 text-orange-500" />,
+      icon: <Cpu className="h-10 w-10 text-amber-500" />,
       title: "Control Systems",
       description: "Installation and maintenance of advanced control systems, including PLCs, HMIs, and SCADA systems for automated industrial processes.",
       details: [
@@ -101,22 +101,22 @@ export default function Industrial() {
     {
       title: "Minimize Downtime",
       description: "Our industrial-grade solutions are designed for reliability and durability, minimizing production interruptions.",
-      icon: <Clock className="h-8 w-8 text-orange-500" />
+      icon: <Clock className="h-8 w-8 text-amber-500" />
     },
     {
       title: "Safety Compliance",
       description: "We ensure all electrical work meets or exceeds OSHA, NEC, and industry-specific safety standards.",
-      icon: <Shield className="h-8 w-8 text-orange-500" />
+      icon: <Shield className="h-8 w-8 text-amber-500" />
     },
     {
       title: "Energy Efficiency",
       description: "Our solutions help reduce energy consumption while maintaining optimal performance for your industrial operations.",
-      icon: <Gauge className="h-8 w-8 text-orange-500" />
+      icon: <Gauge className="h-8 w-8 text-amber-500" />
     },
     {
       title: "24/7 Emergency Support",
       description: "Round-the-clock emergency service for critical industrial electrical failures.",
-      icon: <AlertCircle className="h-8 w-8 text-orange-500" />
+      icon: <AlertCircle className="h-8 w-8 text-amber-500" />
     }
   ];
 
@@ -136,7 +136,7 @@ export default function Industrial() {
     <div className="bg-zinc-900 text-zinc-100">
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center bg-black">
-        <div 
+        <div
           className="absolute inset-0 z-0"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=2000')",
@@ -154,15 +154,15 @@ export default function Industrial() {
               Powering industry with reliable, efficient, and innovative electrical solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
+              <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600">
                 <a href={`tel:${business?.basic_info.phone}`}>
                   <Phone className="mr-2 h-5 w-5" />
                   {business?.basic_info.phone || 'Contact Industrial Division'}
                 </a>
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="border-white text-white hover:bg-white hover:text-zinc-900"
                 onClick={() => {
                   const contactSection = document.getElementById('industrial-contact');
@@ -179,8 +179,8 @@ export default function Industrial() {
       </section>
 
       {/* Industrial Services Section */}
-      <section 
-        ref={servicesRef} 
+      <section
+        ref={servicesRef}
         className="py-20 bg-gradient-to-b from-zinc-900 to-zinc-800"
       >
         <div className="container">
@@ -193,11 +193,11 @@ export default function Industrial() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {industrialServices.map((service, index) => (
-              <div 
+              <div
                 key={index}
                 className={`bg-zinc-800 rounded-lg overflow-hidden transition-all duration-1000 border border-zinc-700 ${
-                  visibleSections.services 
-                    ? 'translate-y-0 opacity-100' 
+                  visibleSections.services
+                    ? 'translate-y-0 opacity-100'
                     : index % 2 === 0 ? 'translate-y-20 opacity-0' : '-translate-y-20 opacity-0'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
@@ -213,7 +213,7 @@ export default function Industrial() {
                       <ul className="space-y-2">
                         {service.details.map((detail, idx) => (
                           <li key={idx} className="flex items-center text-zinc-400">
-                            <Check className="h-5 w-5 text-orange-500 mr-2" />
+                            <Check className="h-5 w-5 text-amber-500 mr-2" />
                             {detail}
                           </li>
                         ))}
@@ -229,7 +229,7 @@ export default function Industrial() {
 
 
       {/* Benefits Section */}
-      <section 
+      <section
         ref={benefitsRef}
         className="py-20 bg-zinc-800"
         style={{
@@ -250,11 +250,11 @@ export default function Industrial() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`bg-zinc-900/80 backdrop-blur-sm p-8 rounded-lg border border-zinc-700 shadow-lg transition-all duration-700 ${
-                  visibleSections.benefits 
-                    ? 'translate-y-0 opacity-100' 
+                  visibleSections.benefits
+                    ? 'translate-y-0 opacity-100'
                     : 'translate-y-16 opacity-0'
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
@@ -268,23 +268,23 @@ export default function Industrial() {
 
           {/* Client Success Story */}
           <div className={`mt-16 bg-zinc-900/70 backdrop-blur-sm p-8 rounded-lg border border-zinc-700 transition-all duration-1000 ${
-            visibleSections.benefits 
-              ? 'translate-y-0 opacity-100' 
+            visibleSections.benefits
+              ? 'translate-y-0 opacity-100'
               : 'translate-y-16 opacity-0'
           }`} style={{ transitionDelay: '400ms' }}>
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="md:w-1/3">
                 <div className="relative rounded-lg overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1586528116493-a029325540b6?auto=format&fit=crop&q=80&w=800" 
-                    alt="Industrial facility" 
+                  <img
+                    src="https://images.unsplash.com/photo-1586528116493-a029325540b6?auto=format&fit=crop&q=80&w=800"
+                    alt="Industrial facility"
                     className="w-full aspect-video object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/60 to-transparent"></div>
                 </div>
               </div>
               <div className="md:w-2/3">
-                <div className="inline-block bg-orange-600/20 border border-orange-600/50 text-orange-300 px-3 py-1 rounded-md text-sm font-medium mb-2">
+                <div className="inline-block bg-amber-600/20 border border-amber-600/50 text-amber-300 px-3 py-1 rounded-md text-sm font-medium mb-2">
                   SUCCESS STORY
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Midwest Manufacturing Plant Upgrade</h3>
@@ -293,15 +293,15 @@ export default function Industrial() {
                 </p>
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-orange-500">40%</div>
+                    <div className="text-2xl font-bold text-amber-500">40%</div>
                     <div className="text-sm text-zinc-400">Energy Savings</div>
                   </div>
                   <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-orange-500">0</div>
+                    <div className="text-2xl font-bold text-amber-500">0</div>
                     <div className="text-sm text-zinc-400">Production Downtime</div>
                   </div>
                   <div className="bg-zinc-800/70 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-orange-500">3x</div>
+                    <div className="text-2xl font-bold text-amber-500">3x</div>
                     <div className="text-sm text-zinc-400">Capacity Increase</div>
                   </div>
                 </div>
@@ -315,15 +315,15 @@ export default function Industrial() {
       </section>
 
       {/* Expertise Section */}
-      <section 
+      <section
         ref={expertiseRef}
         className="py-20 bg-gradient-to-t from-zinc-900 to-zinc-800"
       >
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className={`transition-all duration-1000 ${
-              visibleSections.expertise 
-                ? 'translate-x-0 opacity-100' 
+              visibleSections.expertise
+                ? 'translate-x-0 opacity-100'
                 : '-translate-x-20 opacity-0'
             }`}>
               <h2 className="text-4xl font-bold mb-6 text-white">Our Industrial Expertise</h2>
@@ -334,7 +334,7 @@ export default function Industrial() {
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {expertiseAreas.map((area, index) => (
                   <div key={index} className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-orange-500 shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-amber-500 shrink-0" />
                     <span className="text-zinc-200">{area}</span>
                   </div>
                 ))}
@@ -342,8 +342,8 @@ export default function Industrial() {
 
               <div className="bg-zinc-800 p-6 rounded-lg border border-zinc-700">
                 <div className="flex items-start gap-4">
-                  <div className="bg-orange-600/20 p-2 rounded-full">
-                    <Shield className="h-6 w-6 text-orange-500" />
+                  <div className="bg-amber-600/20 p-2 rounded-full">
+                    <Shield className="h-6 w-6 text-amber-500" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-white mb-2">Safety-First Approach</h3>
@@ -356,28 +356,28 @@ export default function Industrial() {
             </div>
 
             <div className={`grid grid-cols-2 gap-4 transition-all duration-1000 ${
-              visibleSections.expertise 
-                ? 'translate-x-0 opacity-100' 
+              visibleSections.expertise
+                ? 'translate-x-0 opacity-100'
                 : 'translate-x-20 opacity-0'
             }`} style={{ transitionDelay: '200ms' }}>
               <div className="aspect-square bg-zinc-800 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1581093458791-9f3c3fbe8c54?auto=format&fit=crop&q=80&w=600" 
-                  alt="Industrial electrical panel" 
+                <img
+                  src="https://images.unsplash.com/photo-1581093458791-9f3c3fbe8c54?auto=format&fit=crop&q=80&w=600"
+                  alt="Industrial electrical panel"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square bg-zinc-800 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1623976396214-cdcf7a58ff63?auto=format&fit=crop&q=80&w=600" 
-                  alt="Factory electrical installation" 
+                <img
+                  src="https://images.unsplash.com/photo-1623976396214-cdcf7a58ff63?auto=format&fit=crop&q=80&w=600"
+                  alt="Factory electrical installation"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="col-span-2 aspect-video bg-zinc-800 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=1200" 
-                  alt="Industrial facility" 
+                <img
+                  src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=1200"
+                  alt="Industrial facility"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -399,13 +399,13 @@ export default function Industrial() {
           <div className="relative">
             {/* Process Timeline - Desktop */}
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-1.5 bg-zinc-700 -translate-y-1/2 rounded-full">
-              <div className="absolute top-0 left-0 h-full w-0 bg-orange-500 rounded-full transition-all duration-1000" style={{ width: visibleSections.expertise ? '100%' : '0%' }}></div>
+              <div className="absolute top-0 left-0 h-full w-0 bg-amber-500 rounded-full transition-all duration-1000" style={{ width: visibleSections.expertise ? '100%' : '0%' }}></div>
             </div>
 
             <div className="grid md:grid-cols-4 gap-8">
               {/* Step 1 */}
               <div className="relative">
-                <div className={`bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`}>
+                <div className={`bg-amber-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`}>
                   <span className="text-2xl font-bold">1</span>
                 </div>
                 <div className={`bg-zinc-900 rounded-lg p-6 transition-all duration-700 border border-zinc-700 ${visibleSections.expertise ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
@@ -416,7 +416,7 @@ export default function Industrial() {
 
               {/* Step 2 */}
               <div className="relative">
-                <div className={`bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '200ms' }}>
+                <div className={`bg-amber-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '200ms' }}>
                   <span className="text-2xl font-bold">2</span>
                 </div>
                 <div className={`bg-zinc-900 rounded-lg p-6 transition-all duration-700 border border-zinc-700 ${visibleSections.expertise ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '200ms' }}>
@@ -427,7 +427,7 @@ export default function Industrial() {
 
               {/* Step 3 */}
               <div className="relative">
-                <div className={`bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '400ms' }}>
+                <div className={`bg-amber-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '400ms' }}>
                   <span className="text-2xl font-bold">3</span>
                 </div>
                 <div className={`bg-zinc-900 rounded-lg p-6 transition-all duration-700 border border-zinc-700 ${visibleSections.expertise ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
@@ -438,7 +438,7 @@ export default function Industrial() {
 
               {/* Step 4 */}
               <div className="relative">
-                <div className={`bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '600ms' }}>
+                <div className={`bg-amber-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 z-10 relative transition-all duration-700 ${visibleSections.expertise ? 'scale-100' : 'scale-0'}`} style={{ transitionDelay: '600ms' }}>
                   <span className="text-2xl font-bold">4</span>
                 </div>
                 <div className={`bg-zinc-900 rounded-lg p-6 transition-all duration-700 border border-zinc-700 ${visibleSections.expertise ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '600ms' }}>
@@ -453,8 +453,8 @@ export default function Industrial() {
           <div className="mt-16 grid md:grid-cols-3 gap-8">
             <div className="bg-zinc-900 p-6 rounded-lg border border-zinc-700">
               <div className="flex items-start gap-4 mb-4">
-                <div className="bg-orange-600/20 p-2 rounded-full">
-                  <Cable className="h-6 w-6 text-orange-500" />
+                <div className="bg-amber-600/20 p-2 rounded-full">
+                  <Cable className="h-6 w-6 text-amber-500" />
                 </div>
                 <h3 className="text-lg font-bold text-white">Certified Installation</h3>
               </div>
@@ -465,8 +465,8 @@ export default function Industrial() {
 
             <div className="bg-zinc-900 p-6 rounded-lg border border-zinc-700">
               <div className="flex items-start gap-4 mb-4">
-                <div className="bg-orange-600/20 p-2 rounded-full">
-                  <Cpu className="h-6 w-6 text-orange-500" />
+                <div className="bg-amber-600/20 p-2 rounded-full">
+                  <Cpu className="h-6 w-6 text-amber-500" />
                 </div>
                 <h3 className="text-lg font-bold text-white">Advanced Technology</h3>
               </div>
@@ -477,8 +477,8 @@ export default function Industrial() {
 
             <div className="bg-zinc-900 p-6 rounded-lg border border-zinc-700">
               <div className="flex items-start gap-4 mb-4">
-                <div className="bg-orange-600/20 p-2 rounded-full">
-                  <Wrench className="h-6 w-6 text-orange-500" />
+                <div className="bg-amber-600/20 p-2 rounded-full">
+                  <Wrench className="h-6 w-6 text-amber-500" />
                 </div>
                 <h3 className="text-lg font-bold text-white">Ongoing Support</h3>
               </div>
@@ -503,9 +503,9 @@ export default function Industrial() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
               <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=600" 
-                  alt="Manufacturing" 
+                <img
+                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=600"
+                  alt="Manufacturing"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -517,8 +517,8 @@ export default function Industrial() {
 
             <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
               <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1531256379416-9f000e90aacc?auto=format&fit=crop&q=80&w=600" 
+                <img
+                  src="https://images.unsplash.com/photo-1531256379416-9f000e90aacc?auto=format&fit=crop&q=80&w=600"
                   alt="Food Processing"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -531,8 +531,8 @@ export default function Industrial() {
 
             <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
               <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1560274487-6c50a758c829?auto=format&fit=crop&q=80&w=600" 
+                <img
+                  src="https://images.unsplash.com/photo-1560274487-6c50a758c829?auto=format&fit=crop&q=80&w=600"
                   alt="Warehouses"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -545,8 +545,8 @@ export default function Industrial() {
 
             <div className="bg-zinc-800 overflow-hidden rounded-lg group relative">
               <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1574681957670-f09a73e4a09f?auto=format&fit=crop&q=80&w=600" 
+                <img
+                  src="https://images.unsplash.com/photo-1574681957670-f09a73e4a09f?auto=format&fit=crop&q=80&w=600"
                   alt="Water Treatment"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
