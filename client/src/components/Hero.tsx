@@ -19,21 +19,24 @@ export function Hero() {
       loading: "eager",
       title: "Residential Electrical Services", 
       subtitle: `${business?.basic_info.name || 'Professional'} residential electrical solutions for your home`,
-      link: "/residential"
+      link: "/residential",
+      buttonText: "Learn More"
     },
     {
       image: "https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg",
       loading: "lazy",
       title: "Commercial Electrical Services",
       subtitle: `Powering businesses with ${business?.basic_info.name || 'expert'} commercial solutions`,
-      link: "/commercial"
+      link: "/commercial",
+      buttonText: "Learn More"
     },
     {
       image: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg",
       loading: "lazy",
       title: "Industrial Electrical Services",
       subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
-      link: "/industrial"
+      link: "/industrial",
+      buttonText: "Learn More"
     }
   ];
 
@@ -82,12 +85,12 @@ export function Hero() {
 
             {/* Improved buttons for mobile consistency */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link href={slides[currentSlide].link} className="w-full sm:w-auto">
+              <Link href={slides[currentSlide].link}>
                 <Button 
                   size="lg" 
                   className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto py-2 h-auto sm:h-12"
                 >
-                  Learn More
+                  {slides[currentSlide].buttonText}
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
