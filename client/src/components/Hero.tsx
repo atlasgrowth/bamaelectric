@@ -16,18 +16,21 @@ export function Hero() {
   const slides = [
     {
       image: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
-      title: "Residential Electrical Services",
+      loading: "eager",
+      title: "Residential Electrical Services", 
       subtitle: `${business?.basic_info.name || 'Professional'} residential electrical solutions for your home`,
       link: "/residential"
     },
     {
       image: "https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg",
+      loading: "lazy",
       title: "Commercial Electrical Services",
       subtitle: `Powering businesses with ${business?.basic_info.name || 'expert'} commercial solutions`,
       link: "/commercial"
     },
     {
       image: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg",
+      loading: "lazy",
       title: "Industrial Electrical Services",
       subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
       link: "/industrial"

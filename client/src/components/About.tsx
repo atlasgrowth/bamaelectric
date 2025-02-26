@@ -102,8 +102,7 @@ export function About() {
               {features.map((feature, index) => (
                 <div 
                   key={index} 
-                  className={`bg-white dark:bg-zinc-800 p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200 dark:border-zinc-700 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  style={{ transitionDelay: `${400 + (index * 100)}ms` }}
+                  className="bg-white dark:bg-zinc-800 p-6 md:p-8 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-700"
                 >
                   <div className="flex items-start gap-4">
                     <div className="shrink-0">
