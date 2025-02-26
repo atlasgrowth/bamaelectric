@@ -118,7 +118,7 @@ export default function Services() {
                   </h3>
                 </div>
                 <p className="text-zinc-600 dark:text-zinc-300 mb-6">{service.description}</p>
-                <Link href={service.link} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                <Link href={service.link} onClick={() => setTimeout(() => window.scrollTo(0, 0), 100)}>
                   <Button className="w-full bg-amber-500 hover:bg-amber-600 text-black group">
                     Learn More 
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
