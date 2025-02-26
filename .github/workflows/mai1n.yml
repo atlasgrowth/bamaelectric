@@ -1,0 +1,46 @@
+To set up a GitHub Actions workflow to copy files from `bamaelectric` to `arkansaselectric` without needing a new token, you can use the default `GITHUB_TOKEN` provided by GitHub Actions. Here is the specific workflow file:
+
+1. Create a new file in the `.github/workflows` directory of your `bamaelectric` repository, for example, `.github/workflows/copy-files.yml`.
+
+2. Add the following content to the file:
+
+```yaml
+name: Copy Files to New Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Current Repository
+        uses: actions/checkout@v2
+        with:
+          repository: atlasgrowth/bamaelectric
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout New Repository
+        uses: actions/checkout@v2
+        with:
+          repository: atlasgrowth/arkansaselectric
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: new-repo
+
+      - name: Copy Files
+        run: |
+          rsync -av --progress . ./new-repo --exclude .git --exclude new-repo
+
+      - name: Commit and Push Changes
+        run: |
+          cd new-repo
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m 'Copy files from bamaelectric'
+          git push
+```
+
+This workflow will copy files from the `bamaelectric` repository to the `arkansaselectric` repository whenever there is a push to the main branch.
