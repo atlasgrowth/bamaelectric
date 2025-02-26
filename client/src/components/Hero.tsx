@@ -57,7 +57,7 @@ export function Hero() {
             backgroundPosition: 'center'
           }}
         >
-          <div className="absolute inset-0 bg-zinc-900/80 dark:bg-black/80" />
+          <div className="absolute inset-0 bg-zinc-900/60 dark:bg-black/60" />
         </div>
       ))}
 

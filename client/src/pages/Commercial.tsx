@@ -181,7 +181,7 @@ const Commercial = () => {
             backgroundImage: 'url(https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.4
+            opacity: 0.6
           }}
         />
         <div className="container relative z-10">
@@ -393,7 +393,7 @@ const Commercial = () => {
             </Button>
 
             <div className="mt-12 bg-zinc-900 dark:bg-black border border-zinc-800 rounded-lg p-6">
-              <h3 className="text-xl font-bold mb-4 text-white">Why Businesses Choose Us</h3>
+              <h3 className="text-xl font-bold mb-4 text-white">Why Businesses Choose {business?.basic_info.name || 'Us'}</h3>
               <ul className="space-y-3">
                 {[
                   "Dedicated commercial project managers",
