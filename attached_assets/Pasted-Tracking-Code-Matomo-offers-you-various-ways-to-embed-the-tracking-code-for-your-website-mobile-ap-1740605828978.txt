@@ -1,0 +1,36 @@
+Tracking Code
+Matomo offers you various ways to embed the tracking code for your website, mobile app, and even for any device or application.
+
+Go to: JavaScript Tracking Image Tracking Log Analytics Mobile Apps and SDKs HTTP Tracking API Single-Page Application or Progressive Web App Google Tag Manager WordPress Cloudflare Vue.js React.js Tag Manager
+JavaScript Tracking
+You can track visitors to your website in many different ways. The recommended way to do it is through JavaScript. To use this method you must make sure every webpage of your website has some JavaScript code, which you can generate here.
+
+Once you have the JavaScript tracking code for your website, copy and paste it to all the pages you want to track with Matomo. In most websites, blogs, CMS, etc. you can use a pre-made plugin to do the technical work for you. (See our list of plugins used to integrate Matomo.) If no plugin exists you can edit your website templates and add the JavaScript tracking code to the </head> tag which is often defined in a 'header.php', 'header.tpl' or similar template file.
+
+If you don't want to use JavaScript to track visitors, generate an image tracking link below.
+
+If you want to do more than track page views, please check out the Matomo Javascript Tracking documentation for the list of available functions. Using these functions you can track goals, custom variables, ecommerce orders, abandoned carts and more.
+
+Installation Guides : WordPress | Squarespace | Wix | SharePoint | Joomla | Shopify | Google Tag Manager
+
+Website
+b
+JavaScript Tracking Code
+Click on the button to copy the code snippet and paste it immediately before the closing </head> tag (recommended)
+
+Email these instructions
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://nicksanford23.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='https://cdn.matomo.cloud/nicksanford23.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
