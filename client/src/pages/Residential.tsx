@@ -194,7 +194,7 @@ export default function Residential() {
             backgroundImage: 'url(https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.6
+            opacity: 0.75
           }}
         />
         <div className="container relative z-10">

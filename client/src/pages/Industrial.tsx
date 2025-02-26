@@ -142,7 +142,7 @@ export default function Industrial() {
             backgroundImage: "url('https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.6
+            opacity: 0.75
           }}
         />
         <div className="container relative z-10">
