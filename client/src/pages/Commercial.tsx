@@ -193,8 +193,8 @@ const Commercial = () => {
               {business?.basic_info.name || 'Professional'} Commercial Services
             </h1>
             <p className="text-zinc-200 mb-8">
-              Powering businesses with professional electrical solutions by {business?.basic_info.name || 'our expert team'}
-              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}
+              {business?.basic_info.name || 'We are'} powering businesses with professional electrical solutions
+              {business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}, delivering excellence in every project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -396,10 +396,10 @@ const Commercial = () => {
               <h3 className="text-xl font-bold mb-4 text-white">Why Businesses Choose {business?.basic_info.name || 'Us'}</h3>
               <ul className="space-y-3">
                 {[
-                  "Dedicated commercial project managers",
-                  "Transparent pricing and detailed proposals",
-                  "Fully licensed, bonded, and insured",
-                  "Energy-efficient solutions that reduce costs"
+                  `${business?.basic_info.name || 'Our'} dedicated commercial project managers`,
+                  `${business?.basic_info.name || 'Our'} transparent pricing and detailed proposals`,
+                  `${business?.basic_info.name || 'We are'} fully licensed, bonded, and insured`,
+                  `${business?.basic_info.name || 'Our'} energy-efficient solutions that reduce costs`
                 ].map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <CheckCircle className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
