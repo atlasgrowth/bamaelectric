@@ -58,6 +58,10 @@ export function Hero() {
           }}
         >
           <div className="absolute inset-0 bg-zinc-900/40 dark:bg-black/40" />
+          {/* Loading state */}
+          {!slide.image && <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-gray-600"></div>
+          </div>}
         </div>
       ))}
 
@@ -68,7 +72,7 @@ export function Hero() {
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
               {slides[currentSlide].title}
             </h1>
-            <p className="text-zinc-200 mb-6 sm:mb-8 text-sm sm:text-base">
+            <p className="text-white font-medium mb-6 sm:mb-8 text-sm sm:text-base">
               {slides[currentSlide].subtitle}
               {business?.basic_info.city && ` in ${business.basic_info.city}`}
             </p>
