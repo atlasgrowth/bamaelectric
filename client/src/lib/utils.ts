@@ -93,8 +93,14 @@ export const getBusinessData = async () => {
   }
 }
 export const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+  try {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  } catch (error) {
+    // Fallback in case smooth scrolling fails
+    window.scrollTo(0, 0);
+    console.error('Error during scroll:', error);
+  }
 };

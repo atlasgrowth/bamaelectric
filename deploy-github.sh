@@ -26,6 +26,12 @@ fi
 git config user.name "Replit Deployment"
 git config user.email "deployment@example.com"
 
+# Add error handling for git operations
+handle_error() {
+  echo "❌ Error occurred: $1"
+  exit 1
+}
+
 # Step 4: Save all current changes to main branch
 echo "Saving all changes to main branch..."
 git add .
@@ -33,7 +39,11 @@ git commit -m "Update project code - $DEPLOY_DATE" || echo "No changes to commit
 
 # Step 5: Push the main branch to GitHub (this stores all your source code)
 echo "Pushing source code to main branch..."
-git push -u origin main || (echo "Error pushing to main branch. You might need to pull first." && exit 1)
+git push -u origin main || { 
+  echo "Error pushing to main branch. Trying to pull and merge..."
+  git pull --rebase origin main || handle_error "Failed to pull from remote"
+  git push -u origin main || handle_error "Failed to push to main branch"
+}
 
 # Step 6: Build the client-side application
 echo "Building the client application for GitHub Pages..."
