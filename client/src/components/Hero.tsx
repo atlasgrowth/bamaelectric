@@ -1,9 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { getBusinessData } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -12,112 +13,110 @@ export function Hero() {
     queryFn: getBusinessData,
     retry: false
   });
-
+  
+  // Pre-defined slides for immediate loading (no waiting for animations)
   const slides = [
     {
-      image: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
-      loading: "eager",
-      title: "Residential Electrical Services", 
-      subtitle: `${business?.basic_info.name || 'Professional'} residential electrical solutions for your home`,
-      link: "/residential",
-      buttonText: "Learn More"
+      title: "Expert Electrical Services",
+      description: `Professional electrical contractors with over 20 years of experience${business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}`,
+      backgroundImage: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
+      link: "/residential"
     },
     {
-      image: "https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/65146ad76f44431d743d2eae.jpeg",
-      loading: "lazy",
-      title: "Commercial Electrical Services",
-      subtitle: `Powering businesses with ${business?.basic_info.name || 'expert'} commercial solutions`,
-      link: "/commercial",
-      buttonText: "Learn More"
+      title: "Commercial Solutions",
+      description: "Reliable electrical services for businesses of all sizes",
+      backgroundImage: "https://assets.cdn.filesafe.space/v3AeG4GECxfBsZeF2Mxn/media/64fa13d20a2893ce5bd55fdb.jpeg",
+      link: "/commercial"
     },
     {
-      image: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg",
-      loading: "lazy",
-      title: "Industrial Electrical Services",
-      subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
-      link: "/industrial",
-      buttonText: "Learn More"
+      title: "Industrial Expertise",
+      description: "Heavy-duty electrical solutions for industrial facilities",
+      backgroundImage: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg", 
+      link: "/industrial"
     }
   ];
 
+  // Preload images to avoid blank sections
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    slides.forEach(slide => {
+      const img = new Image();
+      img.src = slide.backgroundImage;
+    });
+  }, []);
 
-    return () => clearInterval(timer);
+  // Simpler slide change logic with no animation delay
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 7000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative h-[85vh] sm:h-[90vh] md:h-screen overflow-hidden">
-      {/* Background slides with overlay */}
+    <section className="relative h-[85vh] sm:h-[90vh] md:h-screen flex items-center bg-black">
+      {/* Background images - loaded with higher priority and no opacity transitions */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            currentSlide === index ? "opacity-100" : "opacity-0"
-          }`}
+          className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url(${slide.image})`,
+            backgroundImage: `url(${slide.backgroundImage})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
+            opacity: currentSlide === index ? 0.75 : 0,
+            transition: 'opacity 0.5s',
+            display: currentSlide === index ? 'block' : 'none', // Improve performance
           }}
-        >
-          <div className="absolute inset-0 bg-zinc-900/40 dark:bg-black/40" />
-          {/* Loading state */}
-          {!slide.image && <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-gray-600"></div>
-          </div>}
-        </div>
+        />
       ))}
 
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center">
-        <div className="container relative z-10 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto sm:mx-0 text-center sm:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
+      {/* Content container */}
+      <div className="container relative z-10">
+        <div className="max-w-2xl">
+          <div className="bg-amber-500 text-black px-4 py-1 rounded-md text-sm font-medium inline-block mb-4">
+            ELECTRICAL SERVICES
+          </div>
+          
+          {/* Text content - all loaded at once to prevent blank spaces */}
+          <div>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               {slides[currentSlide].title}
             </h1>
-            <p className="text-white font-medium mb-6 sm:mb-8 text-sm sm:text-base">
-              {slides[currentSlide].subtitle}
-              {business?.basic_info.city && ` in ${business.basic_info.city}`}
+            <p className="text-zinc-200 mb-8">
+              {slides[currentSlide].description}
             </p>
-
-            {/* Improved buttons for mobile consistency */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link href={slides[currentSlide].link}>
-                <Button 
-                  size="lg" 
-                  className="bg-amber-500 hover:bg-amber-600 text-black w-full sm:w-auto py-2 h-auto sm:h-12"
-                >
-                  {slides[currentSlide].buttonText}
-                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-              </Link>
-
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-black">
+                <a href={`tel:${business?.basic_info.phone}`}>
+                  <Phone className="mr-2 h-5 w-5" />
+                  {business?.basic_info.phone || 'Call Now'}
+                </a>
+              </Button>
               <Button 
-                size="lg" 
+                asChild 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-black transition-colors w-full sm:w-auto py-2 h-auto sm:h-12"
-                onClick={() => window.location.href = `tel:${business?.basic_info.phone}`}
+                size="lg"
+                className="border-white text-white hover:bg-white/10"
               >
-                <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                {business?.basic_info.phone || 'Contact Us'}
+                <Link href={slides[currentSlide].link}>
+                  Learn More
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Slide indicators - positioned higher from bottom on mobile */}
-      <div className="absolute bottom-8 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      {/* Simple dots navigation */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10">
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors ${
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full ${
               currentSlide === index ? "bg-amber-500" : "bg-white/50"
             }`}
-            onClick={() => setCurrentSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

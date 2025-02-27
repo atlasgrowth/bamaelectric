@@ -181,6 +181,9 @@ export default function Industrial() {
       >
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-4 py-1 rounded-md text-amber-500 text-sm font-medium mb-4">
+              INDUSTRIAL SERVICES
+            </div>
             <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Industrial Electrical Solutions</h2>
             <p className="text-zinc-600 dark:text-zinc-300">
               Comprehensive industrial electrical services tailored to meet the demanding needs of manufacturing and processing facilities.

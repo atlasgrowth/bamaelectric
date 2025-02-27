@@ -91,3 +91,35 @@ body {
 section {
   opacity: 1 !important;
 }
+
+/* Optimize image loading and rendering */
+[style*="background-image"] {
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Improve performance for large sections and containers */
+section, .container, [class*='h-screen'] {
+  contain: content;
+}
+
+/* Force hardware acceleration for crucial elements */
+.bg-black, .container, section {
+  transform: translateZ(0);
+}
+
+/* Prevent content jumping and layout shifts */
+[class*='h-['] {
+  min-height: 500px;
+}
+
+/* Make sure images load with higher priority */
+[style*="background-image"]::before {
+  content: "";
+  display: block;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
