@@ -20,16 +20,8 @@ export default function Services() {
       ([entry]) => {
         if (entry.isIntersecting) {
           // Start revealing cards one by one
-          const timer = setInterval(() => {
-            setVisibleCards(prev => {
-              if (prev.length < services.length) {
-                return [...prev, prev.length];
-              } else {
-                clearInterval(timer);
-                return prev;
-              }
-            });
-          }, 200);
+          // Show all cards immediately instead of staggered loading
+          setVisibleCards([0, 1, 2]);
 
           return () => clearInterval(timer);
         }

@@ -72,3 +72,22 @@
 [class*='to-blue'] {
   @apply from-black to-black dark:from-black dark:to-black;
 }
+
+body {
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Add fallback display for content that might be in animated sections */
+[class*='opacity-0'] {
+  opacity: 0.95 !important;
+}
+
+/* Reduce all animation durations site-wide */
+[class*='duration-1000'] {
+  transition-duration: 300ms !important;
+}
+
+/* Make all sections visible by default */
+section {
+  opacity: 1 !important;
+}

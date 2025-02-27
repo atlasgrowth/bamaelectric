@@ -67,7 +67,7 @@ export function About() {
       <div className="container relative z-10 px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
           {/* Image container with animation */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
+          <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-100 translate-x-0'}`}>
             <div 
               className="h-[350px] md:h-[600px] bg-cover bg-center rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-8 border-white dark:border-zinc-800 relative"
               style={{ 
