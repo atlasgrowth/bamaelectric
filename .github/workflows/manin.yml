@@ -1,0 +1,32 @@
+name: Clone and Duplicate Repository
+
+on:
+  push: # Trigger the workflow on push events (you can adjust this trigger as needed)
+    branches:
+      - main
+
+jobs:
+  duplicate-repo:
+    runs-on: ubuntu-latest # Use an Ubuntu runner (or any other runner you prefer)
+
+    steps:
+      # Step 1: Clone the repository using the checkout action
+      - name: Checkout Repository
+        uses: actions/checkout@v4 # This clones the repo into the runner's workspace
+
+      # Step 2: Create a second copy of the repository
+      - name: Duplicate the Repository
+        run: |
+          # Copy the entire repository to a new directory
+          cp -r . ../second-copy
+          # List the directories to confirm
+          ls -la
+          ls -la ../second-copy
+
+      # Optional: Do something with the two copies
+      - name: Verify Both Copies
+        run: |
+          echo "Original repo contents:"
+          ls -la
+          echo "Second copy contents:"
+          ls -la ../second-copy
