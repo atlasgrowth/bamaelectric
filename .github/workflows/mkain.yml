@@ -1,0 +1,15 @@
+name: Clone bamaelectric repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v3
+
+      - name: Clone bamaelectric repository
+        run: |
+          git clone https://github.com/atlasgrowth/bamaelectric.git
