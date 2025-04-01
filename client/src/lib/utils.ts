@@ -31,35 +31,19 @@ interface RawBusinessData {
 }
 
 export const getBusinessData = async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const businessId = urlParams.get('s');
-
-  if (!businessId) {
-    throw new Error('Please provide a business ID in the URL using the "s" parameter');
-  }
-
   try {
-    const response = await fetch(
-      'https://raw.githubusercontent.com/atlasgrowth/alabamaelectric/main/electricians.json'
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to load business data: ${response.status}`);
-    }
-
-    const rawData = await response.json() as Record<string, RawBusinessData>;
-
-    // Find the business by the 's' parameter
-    const businessEntries = Object.entries(rawData);
-    const business = businessEntries.find(([_, value]) => 
-      value.s === businessId
-    );
-
-    if (!business) {
-      throw new Error('Business not found');
-    }
-
-    const [_, data] = business;
+    // Hardcoded data for Robinson Electrical Contractors
+    const data: RawBusinessData = {
+      name: "Robinson Electrical Contractors LLC",
+      phone: "+1 205-597-9462",
+      city: "Birmingham",
+      rating: "4.7",
+      latitude: "33.627996",
+      longitude: "-86.6680343",
+      reviews: "11",
+      reviews_link: "https://search.google.com/local/reviews?placeid=ChIJidqiLzgPiYgR-3IUyeRj8mQ",
+      s: "robinsonelectricalcontractorsllc"
+    };
 
     // Transform the data to match our schema
     const normalizedData = {

@@ -19,19 +19,19 @@ export function Hero() {
     {
       title: "Expert Electrical Services",
       description: `Professional electrical contractors with over 20 years of experience${business?.basic_info.city ? ` in ${business.basic_info.city}` : ''}`,
-      backgroundImage: "https://assets.cdn.filesafe.space/jcEKoOF2TKiEyPXqmAdw/media/64fa13d20a2893ce5bd55fe5.jpeg",
+      backgroundImage: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80",
       link: "/residential"
     },
     {
       title: "Commercial Solutions",
       description: "Reliable electrical services for businesses of all sizes",
-      backgroundImage: "https://assets.cdn.filesafe.space/v3AeG4GECxfBsZeF2Mxn/media/64fa13d20a2893ce5bd55fdb.jpeg",
+      backgroundImage: "https://images.unsplash.com/photo-1565360913929-5ae7358fca3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       link: "/commercial"
     },
     {
       title: "Industrial Expertise",
       description: "Heavy-duty electrical solutions for industrial facilities",
-      backgroundImage: "https://assets.cdn.filesafe.space/UFb0NvEbDfQq93rXZtcZ/media/802c411f-2c04-4189-b054-a9feda1e99ad.jpeg", 
+      backgroundImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", 
       link: "/industrial"
     }
   ];
@@ -63,12 +63,15 @@ export function Hero() {
             backgroundImage: `url(${slide.backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: currentSlide === index ? 0.75 : 0,
+            opacity: currentSlide === index ? 1 : 0,
             transition: 'opacity 0.5s',
             display: currentSlide === index ? 'block' : 'none', // Improve performance
           }}
         />
       ))}
+      
+      {/* Dark overlay to ensure text visibility */}
+      <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
       {/* Content container */}
       <div className="container relative z-10">
@@ -94,9 +97,8 @@ export function Hero() {
               </Button>
               <Button 
                 asChild 
-                variant="outline" 
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="bg-white text-black hover:bg-gray-200 border-white"
               >
                 <Link href={slides[currentSlide].link}>
                   Learn More

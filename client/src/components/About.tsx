@@ -71,8 +71,8 @@ export function About() {
             <div 
               className="h-[350px] md:h-[600px] bg-cover bg-center rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-8 border-white dark:border-zinc-800 relative"
               style={{ 
-                backgroundImage: 'url(https://assets.cdn.filesafe.space/A9rd4HdLD0sTvRuuQFZl/media/651467e9c9753e1824a62ef8.jpeg)',
-                backgroundPosition: 'center 20%'
+                backgroundImage: 'url(https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80)',
+                backgroundPosition: 'center'
               }}
             >
               {/* Overlay with company name for mobile */}

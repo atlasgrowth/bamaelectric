@@ -10,32 +10,51 @@ export function ServiceArea() {
     retry: false
   });
 
+  const serviceAreas = [
+    "Birmingham",
+    "Hoover",
+    "Vestavia Hills",
+    "Mountain Brook",
+    "Homewood",
+    "Trussville",
+    "Pelham",
+    "Alabaster",
+    "Helena",
+    "Bessemer"
+  ];
+
   return (
     <section className="py-20 bg-white dark:bg-zinc-900">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4">
-            {business?.basic_info.name || 'Our'} Service Area
+            Our Service Area
           </h2>
           <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
-            Serving {business?.basic_info.city || 'Bradley'} and surrounding communities for all your electrical needs
+            Based in {business?.basic_info.city || 'Birmingham'}, serving the greater Birmingham area and surrounding communities
           </p>
         </div>
         
-        <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
-          <iframe
-            src={`https://www.google.com/maps/embed/v1/place?key=${business?.google_maps_api_key || ''}&q=${business?.basic_info.city || 'Bradley,IL'}`}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-6">
-            <div className="flex items-center justify-center text-white">
-              <MapPin className="h-5 w-5 mr-2" />
-              <span>Based in {business?.basic_info.city || 'Bradley'}, serving all surrounding areas</span>
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-zinc-100 dark:bg-zinc-800 p-8 rounded-lg">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-center">
+              {serviceAreas.map((area, index) => (
+                <div key={index} className="p-3">
+                  <div className="flex items-center justify-center mb-2">
+                    <MapPin className="h-5 w-5 text-amber-500" />
+                  </div>
+                  <p className="font-medium text-zinc-900 dark:text-white">{area}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="text-zinc-600 dark:text-zinc-300 text-lg">
+                ...and all surrounding areas within a 50-mile radius.
+              </p>
+              <p className="text-amber-500 mt-4 font-medium">
+                Not sure if we service your area? Give us a call!
+              </p>
             </div>
           </div>
         </div>
