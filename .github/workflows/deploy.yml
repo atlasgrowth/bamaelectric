@@ -30,8 +30,20 @@ jobs:
       - name: Build
         run: npm run build:client
 
+      - name: Create 404.html
+        run: cp dist/index.html dist/404.html
+
+      - name: Enable GitHub Pages in repository settings
+        run: |
+          echo "IMPORTANT: Make sure to enable GitHub Pages in repository settings:"
+          echo "1. Go to repository Settings > Pages"
+          echo "2. Set Source to 'Deploy from a branch'"
+          echo "3. Set Branch to 'gh-pages' and folder to '/ (root)'"
+          echo "4. Click Save"
+
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          enable_jekyll: false
